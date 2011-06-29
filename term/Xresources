@@ -1,0 +1,14 @@
+! mouse cursor settings
+Xcursor.theme: sc2_green
+
+! terminal color settings
+*background: #000000
+*foreground: #00dddd
+
+! terminal preferences
+--disable-xft:
+--disable-unicode3:
+*scrollstyle: off
+*perl-ext-common: default,matcher
+*urlLauncher: /usr/bin/chromium
+*matcher.button: 1

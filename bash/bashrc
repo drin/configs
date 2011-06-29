@@ -1,0 +1,11 @@
+#environment variables
+export BROWSER=chromium
+
+#various paths
+export PATH=$PATH:/usr/local/bin
+
+#alias definitons
+if [ -f ~/.bash_aliases ]; then
+   . ~/.bash_aliases
+   echo "===> Loaded .bash_aliases";
+fi
