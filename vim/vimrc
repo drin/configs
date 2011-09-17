@@ -17,6 +17,13 @@ if &t_Co > 2 || has("gui_running")
   set hlsearch
 endif
 
+" This is auto open same line. aka when a file is closed in vim, it will
+" reopen on the same line... PIMP
+if has("autocmd")
+   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+   \| exe "normal! g'\"" | endif
+endif
+
 set ai " Auto indent
 set si " smart indenting
 

@@ -9,3 +9,6 @@ if [ -f ~/.bash_aliases ]; then
    . ~/.bash_aliases
    echo "===> Loaded .bash_aliases";
 fi
+
+#I know this is color related but I don't know exactly what it does
+PS1='[\u@\h \W]\$ '
