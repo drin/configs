@@ -1,0 +1,10 @@
+URxvt.inputMethod:      ibus
+URxvt.preeditType:      OnTheSpot, None
+URxvt.imLocale:         ja_JP.UTF-8
+URxvt.background:       #000000
+URxvt.foreground:       gray90
+URxvt.color7:           gray90
+URxvt.colorBD:          #ffffff
+URxvt.cursorColor:      #e0e080
+URxvt.throughColor:     #8080f0
+URxvt.highlightColor:   #f0f0f0

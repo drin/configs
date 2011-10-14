@@ -1,0 +1,18 @@
+#!/bin/sh
+
+/usr/bin/autocutsel -fork &
+/usr/bin/autocutsel -selection PRIMARY -fork &
+/usr/local/bin/urxvtd -q -f -o &
+/usr/bin/xscreensaver -no-splash &
+/usr/lib/notification-daemon/notification-daemon &
+
+ibus-daemon --xim &
+dhcpcd &
+
+#while true;
+#do
+   #awsetbg -r /home/amontana/pictures/Wallpaper/1680_1050/
+   #sleep 5m
+#done &
+
+exec awesome
