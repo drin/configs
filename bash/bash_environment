@@ -1,0 +1,14 @@
+export PATH=$PATH:/usr/local/bin
+export BROWSER=chromium
+export EDITOR=vim
+
+if [[ `pgrep ssh-agent` = '' ]]; then
+   ssh-agent
+fi
+
+export SSH_AUTH_SOCK=`find /tmp -name "agent\.*" | xargs echo`
+export SSH_AGENT_PID=`pgrep ssh-agent`
+
+if [[ `ssh-add -l` = 'The agent has no identities.' ]]; then
+   `find ~/.ssh/ -name "*rsa"` | xargs ssh-add
+fi

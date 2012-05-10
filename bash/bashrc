@@ -2,19 +2,21 @@
 # ~/.bashrc
 #
 
-#environment variables
-export BROWSER=chromium
+# make sure I'm in the home directory
+cd
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-#alias definitons
-if [ -f ~/.bash_aliases ]; then
-   . ~/.bash_aliases
-   echo "===> Loaded .bash_aliases";
+PS1='[\u@\h \W]\$ '
+
+if [ -f ~/.bash_environment ]; then
+   . ~/.bash_environment
+   echo "===> Loaded bash environment"
 fi
 
-PS1='[\u@\h \W]\$ '
-#/usr/share/java/apache-ant/
-
-PATH=$PATH:.
+#alias definitions
+if [ -f ~/.bash_aliases ]; then
+   . ~/.bash_aliases
+   echo "===> Loaded .bash_aliases"
+fi
