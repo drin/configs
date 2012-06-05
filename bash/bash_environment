@@ -1,14 +1,25 @@
-export PATH=$PATH:/usr/local/bin
-export BROWSER=chromium
-export EDITOR=vim
+if [[ $BASH_ENV_LOADED != 1 ]]; then
+   export BASH_ENV_LOADED=1
 
-if [[ `pgrep ssh-agent` = '' ]]; then
-   ssh-agent
-fi
+   export PATH=$PATH:/usr/local/bin
+   export BROWSER=chromium
+   export EDITOR=vim
+   export CLASSPATH=$CLASSPATH:/home/drin/programming/Hive/com/drin/java/database/mysqlj.jar:.
 
-export SSH_AUTH_SOCK=`find /tmp -name "agent\.*" | xargs echo`
-export SSH_AGENT_PID=`pgrep ssh-agent`
+   if [[ `pgrep dhcpcd` -eq '' ]]; then
+      sudo dhcpcd --rebind
+      echo "Started DHCP"
+   fi
 
-if [[ `ssh-add -l` = 'The agent has no identities.' ]]; then
-   `find ~/.ssh/ -name "*rsa"` | xargs ssh-add
+   if [[ `pgrep ssh-agent` = '' ]]; then
+      ssh-agent
+      echo "Started SSH-Agent"
+   fi
+
+   export SSH_AUTH_SOCK=`find /tmp -name "agent\.*" | xargs echo`
+   export SSH_AGENT_PID=`pgrep ssh-agent`
+
+   if [[ `ssh-add -l` = 'The agent has no identities.' ]]; then
+      `find ~/.ssh/ -name "*rsa"` | xargs ssh-add
+   fi
 fi

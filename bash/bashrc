@@ -2,15 +2,15 @@
 # ~/.bashrc
 #
 
-# make sure I'm in the home directory
-cd
+# make sure I'm in my home directory
+#cd
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
 PS1='[\u@\h \W]\$ '
 
-if [ -f ~/.bash_environment ]; then
+if [[ -f ~/.bash_environment ]]; then
    . ~/.bash_environment
    echo "===> Loaded bash environment"
 fi
@@ -18,5 +18,5 @@ fi
 #alias definitions
 if [ -f ~/.bash_aliases ]; then
    . ~/.bash_aliases
-   echo "===> Loaded .bash_aliases"
+   echo "===> Loaded bash aliases"
 fi
