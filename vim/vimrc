@@ -4,11 +4,11 @@
 
 set encoding=utf-8
 behave xterm
-set nocompatible       " no compatibility with vi
-filetype on            " recognize syntax by file extension
-filetype plugin on     " Look at .vim/ftplugin
-filetype indent on     " check for indent file
-syntax on              " syntax highlighting
+set nocompatible          " no compatibility with vi
+filetype on               " recognize syntax by file extension
+filetype plugin on        " Look at .vim/ftplugin
+filetype indent on        " check for indent file
+syntax on                 " syntax highlighting
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
@@ -17,49 +17,47 @@ if &t_Co > 2 || has("gui_running")
   set hlsearch
 endif
 
-" This is auto open same line. aka when a file is closed in vim, it will
-" reopen on the same line... PIMP
-if has("autocmd")
-   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
-   \| exe "normal! g'\"" | endif
-endif
+" indenting
+set ai                    " Auto indent
+set si                    " smart indenting
 
-set ai " Auto indent
-set si " smart indenting
-
-set backspace=2        " allow <BS> to go past last insert
-set gdefault           " assume :s uses /g
-set ignorecase         " ignore case in search patterns
-set smartcase          " searches are case-sensitive if caps used
-set incsearch          " immediately highlight search matches
-set noerrorbells       " no beeps on errors
-set nomodeline         " prevent others from overriding this .vimrc
-set number             " display line numbers
-set ruler              " display row, column and % of document
-set showcmd            " show partial commands in the status line
-set showmatch          " show matching () {} etc.
-set showmode           " show current mode
+set backspace=2           " allow <BS> to go past last insert
+set smartcase             " searches are case-sensitive if caps used
+set incsearch             " immediately highlight search matches
+set noerrorbells          " no beeps on errors
+set nomodeline            " prevent others from overriding this .vimrc
+set number                " display line numbers
+set ruler                 " display row, column and % of document
+set showcmd               " show partial commands in the status line
+set showmatch             " show matching () {} etc.
+set showmode              " show current mode
+set wildmenu              " for bash-style tab-completion
+set wildmode=longest,list " set the type of the tab-completion
 
 " Settings for autoindentation, comments, and what-have-you
 
-set expandtab          " expand tabs with spaces
-set tabstop=3          " <Tab> move three characters
-set shiftwidth=3       " >> and << shift 3 spaces
-"set textwidth=79       " hard wrap at 79 characters
-set modeline           " check for a modeline
-set softtabstop=3      " see spaces as tabs
-set scrolloff=5        " start scrolling when cursor is N lines from edge
+set expandtab             " expand tabs with spaces
+set tabstop=3             " <Tab> move three characters
+set shiftwidth=3          " >> and << shift 3 spaces
+set textwidth=79          " hard wrap at 79 characters
+set modeline              " check for a modeline
+set softtabstop=3         " see spaces as tabs
+set scrolloff=5           " start scrolling when cursor is N lines from edge
 
 " whoa... wtf?
-set nowrap             " don't soft wrap
-set wrap               " linewrap
+"set nowrap               " don't soft wrap
+set wrap                  " linewrap
 
 " turns status line always on and configures it
 set laststatus=2
 set statusline=%<%f\ %m\ %h%r%=%b\ 0x%B\ \ %l,%c%V\ %P\ of\ %L
 
 " Puts swapfiles in /tmp instead of current directory.
-set directory=/tmp
+set directory=/var/tmp/vim/swap
+
+" for the saving and loading view files
+set viewoptions=folds
+set viewdir=/var/tmp/vim/view
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " autocommands
@@ -78,7 +76,9 @@ if has("autocmd")
     \   exe "normal! g`\"" |
     \ endif
 
-endif " has("autocmd")
+   "au BufWinLeave * mkview
+   "au BufWinEnter * silent loadview
+endif
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -113,12 +113,21 @@ au BufRead,BufNewFile *.fs set ft=fs
 au BufRead,BufNewFile *.txt highlight clear OverLength
 "au BufRead,BufNewFile *.txt set textwidth=80
 
+" Template Toolkit Files (for perl dancer)
+au BufRead,BufNewFile *.tt set ft=html
+
 " God
 au BufRead,BufNewFile *.god set filetype=ruby
 
 " Tex Files
 au BufRead,BufNewFile *.tex highlight clear OverLength
 au BufRead,BufNewFile *.bib highlight clear OverLength
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Special Key Mappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " Remove trailing spaces from lines w/ F6: http://vim.wikia.com/wiki/Remove_unwanted_spaces
 :nnoremap <silent> <F6> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 
@@ -144,24 +153,27 @@ au BufRead,BufNewFile *.bib highlight clear OverLength
 " Clear search buffer with Ctrl+l
 :noremap <silent> <c-l> :nohls<cr><c-l>
 
+" Tab mappings
 " Tab fun - Tabs can be fun too!
 " @author David Patierno
-:nnoremap ,. :tabnew<CR>
-:nnoremap ., :tabclose<CR>
+:nnoremap tn :tabnew<CR>
+:nnoremap tq :tabclose<CR>
+:nnoremap th :tabp<CR>
+:nnoremap tl :tabn<CR>
 
-" And this is how pros navigate splits and tabs.
-:nnoremap .q :tabp<CR>
-:nnoremap .e :tabn<CR>
-:nnoremap .w <c-w><Up><CR>
-:nnoremap .s <c-w><Down><CR>
-:nnoremap .a <c-w><Left><CR>
-:nnoremap .d <c-w><Right><CR>
-:nnoremap .1 :tabn 1<CR>
-:nnoremap .2 :tabn 2<CR>
-:nnoremap .3 :tabn 3<CR>
-:nnoremap .4 :tabn 4<CR>
-:nnoremap .5 :tabn 5<CR>
-:nnoremap .6 :tabn 6<CR>
-:nnoremap .7 :tabn 7<CR>
-:nnoremap .8 :tabn 8<CR>
-:nnoremap .9 :tabn 9<CR>
+:nnoremap t1 :tabn 1<CR>
+:nnoremap t2 :tabn 2<CR>
+:nnoremap t3 :tabn 3<CR>
+:nnoremap t4 :tabn 4<CR>
+:nnoremap t5 :tabn 5<CR>
+:nnoremap t6 :tabn 6<CR>
+:nnoremap t7 :tabn 7<CR>
+:nnoremap t8 :tabn 8<CR>
+:nnoremap t9 :tabn 9<CR>
+
+" Window mappings
+:nnoremap ek <c-w><Up><CR>
+:nnoremap ej <c-w><Down><CR>
+:nnoremap eh <c-w><Left><CR>
+:nnoremap el <c-w><Right><CR>
+:nnoremap er <c-w>r<CR>
