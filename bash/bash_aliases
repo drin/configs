@@ -3,6 +3,3 @@ alias grep='grep --color=auto'
 alias rm='rm -i'
 
 alias mountmp3='mtpfs -o allow_other /media/mp3drin'
-
-alias greengenes='ssh ec2-user@50.18.170.133'
-alias 560-aws='ssh ec2-user@50.18.101.82'
