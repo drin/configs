@@ -56,12 +56,7 @@ layouts =
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
     awful.layout.suit.tile.top,
-    --awful.layout.suit.fair,
-    --awful.layout.suit.fair.horizontal,
-    --awful.layout.suit.spiral,
-    --awful.layout.suit.spiral.dwindle,
     awful.layout.suit.max,
-    --awful.layout.suit.max.fullscreen,
     awful.layout.suit.magnifier
 }
 -- }}}
@@ -79,8 +74,6 @@ end
 -- Create a laucher widget and a main menu
 myawesomemenu = {
    { "manual", terminal .. " -e man awesome" },
-   --{ "edit config", editor_cmd .. " " .. awful.util.getdir("config") .. "/rc.lua" },
-   { "edit config", editor_cmd .. " " .. awesome.conffile },
    { "restart", awesome.restart },
    { "quit", awesome.quit }
 }
@@ -230,6 +223,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1)      end),
     awful.key({ modkey,           }, "space", function () awful.layout.inc(layouts,  1) end),
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
+    -- This must be a global key because the client window is minimized. OOOoooOOOOHH!
+    awful.key({ modkey, "Control" }, "Up", awful.client.restore),
 
     -- Prompt
     awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
@@ -252,7 +247,6 @@ clientkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "r",      function (c) c:redraw()                       end),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end),
 
-    awful.key({ modkey, "Control" }, "Up", awful.client.restore),
     awful.key({ modkey,           }, "Down",   function (c) c.minimized = not c.minimized    end),
     awful.key({ modkey,           }, "Up",
         function (c)
@@ -336,13 +330,6 @@ client.add_signal("manage", function (c, startup)
     -- Add a titlebar
     -- awful.titlebar.add(c, { modkey = modkey })
 
-   -- Enable sloppy focus
-   -- c:add_signal("mouse::enter", function(c)
-      -- if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
-       -- and awful.client.focus.filter(c) then
-         -- client.focus = c
-      -- end
-   -- end)
 
     if not startup then
         -- Set the windows at the slave,
