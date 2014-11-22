@@ -2,6 +2,9 @@
 " .vimrc -- the way it ought to be: Ha. It rhymes!
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Basic Setup
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set encoding=utf-8
 behave xterm
 set nocompatible          " no compatibility with vi
@@ -87,11 +90,19 @@ endif
 
 syntax enable
 set background=dark
-color darkdrin
+let g:molokai_original = 1
+color molokai
+"color darkdrin
 
 " Highlights long lines (Turned off...)
 "highlight OverLength term=standout cterm=bold ctermfg=1
 "match OverLength /\%91v.\+/
+
+" general language highlighting
+au BufNewFile,BufRead,BufEnter *.{c,cpp,h,javascript,java} call CSyntaxAfter()
+
+" gradle
+au BufNewFile,BufRead *.gradle set filetype=groovy
 
 " Markdown
 au BufRead,BufNewFile *.md set ft=markdown
@@ -172,8 +183,13 @@ au BufRead,BufNewFile *.bib highlight clear OverLength
 :nnoremap t9 :tabn 9<CR>
 
 " Window mappings
-:nnoremap ek <c-w><Up><CR>
-:nnoremap ej <c-w><Down><CR>
-:nnoremap eh <c-w><Left><CR>
-:nnoremap el <c-w><Right><CR>
-:nnoremap er <c-w>r<CR>
+:nnoremap ek <c-w><Up>
+:nnoremap ej <c-w><Down>
+:nnoremap eh <c-w><Left>
+:nnoremap el <c-w><Right>
+:nnoremap er <c-w>r
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Pathogen/plugin management
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+execute pathogen#infect()

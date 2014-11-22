@@ -1,0 +1,4 @@
+alias rm='rm -i'
+alias ls='ls --color=auto'
+alias gradle='gradle --daemon'
+alias vim='vim -O'
