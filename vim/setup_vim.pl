@@ -6,15 +6,17 @@ use Cwd 'abs_path';
 
 use constant GIT_CMD_TEMPLATE => q{git -C %s clone %s};
 
-use constant HOME_VIM_DIR     => "$ENV{HOME}/.vim";
-use constant VIM_BUNDLE_DIR   => HOME_VIM_DIR.q{/bundle};
+use constant HOME_VIM_DIR      => "$ENV{HOME}/.vim";
+use constant VIM_AUTOLOAD_DIR  => HOME_VIM_DIR.q{/autoload};
+use constant VIM_BUNDLE_DIR    => HOME_VIM_DIR.q{/bundle};
 
-use constant VIM_TMP_DIR      => q{/var/tmp/vim};
-use constant VIM_VIEW_DIR     => VIM_TMP_DIR.q{/view};
-use constant VIM_SWAP_DIR     => VIM_TMP_DIR.q{/swap};
+use constant VIM_TMP_DIR       => q{/var/tmp/vim};
+use constant VIM_VIEW_DIR      => VIM_TMP_DIR.q{/view};
+use constant VIM_SWAP_DIR      => VIM_TMP_DIR.q{/swap};
 
-use constant PLUGIN_REPO_LIST => q{vim/plugin_git_list};
-use constant PLUGIN_DIR       => q{vim/plugins};
+use constant PLUGIN_REPO_LIST  => q{vim/plugin_git_list};
+use constant PATHOGEN_LOAD_DIR => q{vim/plugins/vim-pathogen/autoload};
+use constant PLUGIN_DIR        => q{vim/plugins};
 
 sub prepare_dir {
    my ($dir) = (@_);
@@ -80,6 +82,7 @@ prepare_dir(VIM_SWAP_DIR);
 prepare_dir($script_home.PLUGIN_DIR);
 pull_plugins($script_home.PLUGIN_REPO_LIST, PLUGIN_DIR);
 
+link_dir(VIM_AUTOLOAD_DIR, $script_home.PATHOGEN_LOAD_DIR);
 link_dir(VIM_BUNDLE_DIR, $script_home.PLUGIN_DIR);
 
 
