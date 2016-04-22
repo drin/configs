@@ -22,7 +22,11 @@ endif
 
 " indenting
 set ai                    " Auto indent
-set si                    " smart indenting
+
+" smart indent jacks with commenting in python:
+" http://stackoverflow.com/questions/18415492/autoindent-is-subset-of-smartindent-in-vim/18415867#18415867
+" also, removing this does not negatively affect... any language
+" set si                    " smart indenting
 
 set backspace=2           " allow <BS> to go past last insert
 set smartcase             " searches are case-sensitive if caps used
@@ -89,9 +93,9 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 syntax enable
-set background=dark
-let g:molokai_original = 1
-color molokai
+"set background=dark
+"let g:molokai_original = 1
+"color molokai
 "color darkdrin
 
 " Highlights long lines (Turned off...)
