@@ -1,11 +1,3 @@
-# ---------------------
-# Function to launch ssh agent and properly export SSH AGENT environment
-# variables via a python script
-function launch_ssh_agent
-   python -tt ssh_agent.py
-end
-
-
 # ------------------------------
 # Customize fish prompt via fish_prompt function
 # See: https://fishshell.com/docs/current/tutorial.html#tut_prompt

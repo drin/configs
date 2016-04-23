@@ -1,6 +1,12 @@
-set fish_config_dir ~/.config/fish
-set fish_files $fish_config_dir/env.fish $fish_config_dir/aliases.fish $fish_config_dir/functions.fish
+if status --is-login
+   set -U FISH_CONFIG_HOME $HOME/.config/fish
 
+   # ------------------------------
+   # functions to execute at the end of fish configuration
+   launch_ssh_agent
+end
+
+set fish_files $FISH_CONFIG_HOME/env.fish $FISH_CONFIG_HOME/aliases.fish
 for fish_file in $fish_files
    if [ -e $fish_file ]
       echo "=> Loading $fish_file"
