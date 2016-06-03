@@ -2,7 +2,7 @@
 if status --is-login
    # ------------------------------
    # Path environment variables
-   set -Ux PATH /usr/local/bin $PATH 
+   set -gx PATH /usr/local/bin $PATH
 
    # ------------------------------
    # Editor environment variables
