@@ -1,8 +1,11 @@
 if status --is-login
    set -U FISH_CONFIG_HOME $HOME/.config/fish
 
-   # ------------------------------
-   # functions to execute at the end of fish configuration
+   if test -n $SSH_AGENT_PID
+      set -eU SSH_AGENT_PID
+      set -eU SSH_AUTH_SOCK
+   end
+
    launch_ssh_agent
 end
 
