@@ -9,8 +9,4 @@ if [[ $BASH_ENV_LOADED != 1 ]]; then
       eval `ssh-agent`
       echo "Started SSH-Agent"
    fi
-
-   if [[ `ssh-add -l` = 'The agent has no identities.' ]]; then
-      `find ~/.ssh/ -name "*rsa"` | xargs ssh-add
-   fi
 fi
