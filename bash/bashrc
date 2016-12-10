@@ -10,12 +10,19 @@
 
 PS1='[\u@\h \W]\$ '
 
-#alias definitions
+# function definitions
+if [ -f ~/.bash_functions ]; then
+   . ~/.bash_functions
+   echo "===> Loaded bash functions"
+fi
+
+# alias definitions
 if [ -f ~/.bash_aliases ]; then
    . ~/.bash_aliases
    echo "===> Loaded bash aliases"
 fi
 
+# Load environment last so that functions and aliases may be used
 if [[ -f ~/.bash_environment ]]; then
    . ~/.bash_environment
    echo "===> Loaded bash environment"
