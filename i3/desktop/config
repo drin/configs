@@ -160,7 +160,7 @@ bar {
       # Choose output for this bar to be displayed on
       output HDMI-1
 
-      status_command i3status
+      status_command i3status --config ~/.config/i3/i3status.conf
 
       # hide bar by default, but show when pressing the mod key
       mode hide
@@ -171,13 +171,15 @@ bar {
 
       # I prefer bars to be docked on top
       position top
+
+      separator_symbol " "
 }
 
 bar {
       # Choose output for this bar to be displayed on
       output DP-1
 
-      status_command i3status
+      status_command i3status --config ~/.config/i3/i3status.conf
 
       # hide bar by default, but show when pressing the mod key
       mode hide
@@ -188,4 +190,6 @@ bar {
 
       # I prefer bars to be docked on top
       position top
+
+      separator_symbol " "
 }

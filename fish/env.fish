@@ -1,17 +1,3 @@
-# To make sure this only gets loaded once
-if status --is-login
-   # ------------------------------
-   # Path environment variables
-   set -gx PATH /home/drin/bin /usr/local/bin $PATH
-
-   # ------------------------------
-   # Editor environment variables
-   set -Ux EDITOR vim
-   set -Ux GIT_EDITOR vim
-
-   set -gx PAGER less
-end
-
 # ------------------------------
 # Prompt variables
 # Just calculate these once, to save a few cycles when displaying the prompt
