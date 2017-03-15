@@ -9,6 +9,12 @@ if status --is-login
    set -Ux EDITOR vim
    set -Ux GIT_EDITOR vim
    set -Ux PAGER vimpager
+
+   # for mac
+   if [ -d /Users/amontana ]
+      set -gx PATH /Users/amontana/Applications/unixODBC-2.3.0/bin $PATH
+      set -Ux PAGER less
+   end
 end
 
 # ------------------------------
