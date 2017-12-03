@@ -7,17 +7,29 @@ function init_fish
    set -U FISH_CONFIG_HOME $HOME/.config/fish
 
    if test -n $SSH_AGENT_PID
-      set -eU SSH_AGENT_PID
-      set -eU SSH_AUTH_SOCK
+      if not set -q SSH_AGENT_PID
+         set -eU SSH_AGENT_PID
+      end
+
+      if not set -q SSH_AUTH_SOCK
+         set -eU SSH_AUTH_SOCK
+      end
    end
 
    # ------------------------------
    # Path environment variables
-   set -gx PATH /home/drin/bin /usr/local/bin $PATH
+   set -gx PATH /usr/local/bin $PATH
+
+   if test -d /home/drin/bin
+      set -gx PATH /home/drin/bin $PATH
+   end
 
    # ------------------------------
    # Editor environment variables
-   set -Ux EDITOR vim
+   if not set -q EDITOR
+      set -Ux EDITOR vim
+   end
+
    set -Ux GIT_EDITOR vim
 
    set -gx PAGER less

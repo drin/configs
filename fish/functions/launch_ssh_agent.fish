@@ -10,7 +10,12 @@ function launch_ssh_agent
    else
       echo "ssh agent already running."
 
-      set -Ux SSH_AGENT_PID (pgrep ssh-agent)
-      set -Ux SSH_AUTH_SOCK (find /tmp -name 'agent.[[:digit:]]*' -type s)
+      if not set -q SSH_AGENT_PID
+         set -Ux SSH_AGENT_PID (pgrep ssh-agent)
+      end
+
+      if not set -q SSH_AUTH_SOCK
+         set -Ux SSH_AUTH_SOCK (find /tmp -name 'agent.[[:digit:]]*' -type s)
+      end
    end
 end
