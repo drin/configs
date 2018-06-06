@@ -1,6 +1,4 @@
-if status --is-login
-   init_fish
-else if not set -q __fish_configured
+if not set -q __fish_initialized
    init_fish
 end
 
