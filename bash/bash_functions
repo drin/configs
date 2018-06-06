@@ -1,4 +1,6 @@
 function connect_ssh_agent {
+   echo "Exporting variables for running ssh-agent"
+
    export SSH_AGENT_PID=$(pgrep ssh-agent)
-   export SSH_AUTH_SOCK=$(find /tmp -name 'agent.[[:digit:]]*' -type s)
+   export SSH_AUTH_SOCK=$(find /tmp/ssh* -name 'agent.[[:digit:]]*' -type s)
 }
