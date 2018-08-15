@@ -1,7 +1,6 @@
 if [[ $BASH_ENV_LOADED != 1 ]]; then
    export BASH_ENV_LOADED=1
 
-   export PATH=$PATH:/usr/local/bin
    export BROWSER=firefox
    export EDITOR=vim
 
