@@ -4,7 +4,7 @@
 
 module.exports = {
   // format: [@org/]project[#version]
-  plugins     : ['hyper-native-window-decoration', 'hyper-pane', "hyper-night-owl"],
+  plugins     : ['hyper-native-window-decoration', "hyper-night-owl"],
 
   // directory under `~/.hyper_plugins/local/` to load without being `npm install`ed
   localPlugins: [],
