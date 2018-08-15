@@ -1,4 +1,6 @@
 if [[ $BASH_ENV_LOADED != 1 ]]; then
+   echo "Loading BASH env"
+
    export BASH_ENV_LOADED=1
 
    export BROWSER=firefox

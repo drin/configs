@@ -128,8 +128,9 @@ au BufRead,BufNewFile *.fs set ft=fs
 au BufRead,BufNewFile *.txt highlight clear OverLength
 "au BufRead,BufNewFile *.txt set textwidth=80
 
-" Template Toolkit Files (for perl dancer)
-au BufRead,BufNewFile *.tt set ft=html
+" tt  - Template Toolkit Files (for perl dancer)
+" hbs - handlebars template Files (for rocket.rs)
+au BufRead,BufNewFile *.{tt,hbs} set ft=html
 
 " God
 au BufRead,BufNewFile *.god set filetype=ruby
