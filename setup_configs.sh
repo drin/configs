@@ -14,7 +14,7 @@ else
 fi
 
 if [[ ! -d ${HOME}/.vim ]]; then
-   perl ${VIM_DIR}/${VIM_SETUP_SCRIPT}
+   perl ${VIM_DIR}/${VIM_SETUP_SCRIPT} setup
 else
    echo "vim config home already setup. Skipping..."
 fi
@@ -29,3 +29,15 @@ if [[ ! -d ${HOME}/${FISH_CONFIG_HOME} ]]; then
 else
    echo "fish config home already setup. Skipping..."
 fi
+
+# ------------------------------
+# BASH setup
+BASH_DIR=bash
+
+for bash_config in `ls $BASH_DIR`; do
+   if [[ ! -f "${HOME}/.${bash_config}" ]]; then
+      ln "${BASH_DIR}/${bash_config}" "${HOME}/.${bash_config}"
+   else
+      echo "bash config file, ${bash_config}, setup. Skipping..."
+   fi
+done

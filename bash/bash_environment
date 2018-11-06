@@ -1,15 +1,17 @@
 if [[ $BASH_ENV_LOADED != 1 ]]; then
-   export BASH_ENV_LOADED=1
+    echo "Loading BASH env"
 
-   export PATH=$PATH:/usr/local/bin
-   export BROWSER=firefox
-   export EDITOR=vim
+    export BASH_ENV_LOADED=1
 
-   if [[ `pgrep ssh-agent` = '' ]]; then
-      eval `ssh-agent`
-      echo "Started SSH-Agent"
-   else
-      connect_ssh_agent
-   fi
+    export PATH=$PATH:/usr/local/bin
+    export BROWSER=firefox
+    export EDITOR=vim
 
+    # this is really inconvenient on server
+    #if [[ `pgrep ssh-agent` = '' ]]; then
+    #    eval `ssh-agent`
+    #    echo "Started SSH-Agent"
+    #else
+    #    connect_ssh_agent
+    #fi
 fi
