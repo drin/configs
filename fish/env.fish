@@ -12,3 +12,9 @@ end
 if not set -q __fish_color_blue
    set -gx __fish_color_blue (set_color -o blue)
 end
+
+# ------------------------------
+# Environment variables
+if not set -q TERMINAL
+    set -gx TERMINAL hyper
+end

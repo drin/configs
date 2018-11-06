@@ -6,6 +6,7 @@ if [[ $BASH_ENV_LOADED != 1 ]]; then
     export PATH=$PATH:/usr/local/bin
     export BROWSER=firefox
     export EDITOR=vim
+    export TERMINAL=hyper
 
     # this is really inconvenient on server
     #if [[ `pgrep ssh-agent` = '' ]]; then
