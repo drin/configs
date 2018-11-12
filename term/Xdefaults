@@ -5,7 +5,6 @@
 !Terminal Options
 URxvt.inputMethod:      ibus
 URxvt.preeditType:      OnTheSpot, None
-!ja_JP.UTF-8, zh_TW.UTF-8
 URxvt.imLocale:         ko_KR.UTF-8
 URxvt.background:       #000000
 URxvt.foreground:       #88cace
@@ -19,3 +18,6 @@ URxvt.perl-ext-common:  default,matcher
 URxvt.urlLauncher:      /usr/bin/chromium
 URxvt.matcher.button:   1
 URxvt.visualBell:       false
+URxvt.font:            fixed,
+                       -misc-fixed-bold-r-semicondensed--13-120-75-75-c-60-iso8859-1,\
+                       "Font Awesome 5 Free"

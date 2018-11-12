@@ -14,5 +14,9 @@ if not set -q __fish_color_blue
 end
 
 # ------------------------------
-# Env Variables
+# Environment Variables
 set -gx PATH $HOME/.cargo/bin $PATH
+
+if not set -q TERMINAL
+    set -gx TERMINAL hyper
+end

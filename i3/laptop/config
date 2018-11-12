@@ -174,7 +174,7 @@ bar {
 
       separator_symbol " "
 
-      font pango:DejaVu Sans Mono, Icons 8
+      font pango:DejaVu Sans Mono, Icons 8, Font Awesome 5 Free 10px
 }
 
 bar {
@@ -195,5 +195,5 @@ bar {
 
       separator_symbol " "
 
-      font pango:DejaVu Sans Mono, Icons 8
+      font pango:DejaVu Sans Mono, Icons 8, Font Awesome 5 Free 10px
 }
