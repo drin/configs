@@ -46,7 +46,7 @@ set wildmode=longest,list " set the type of the tab-completion
 set expandtab             " expand tabs with spaces
 set tabstop=4             " <Tab> move three characters
 set shiftwidth=4          " >> and << shift 3 spaces
-set textwidth=79          " hard wrap at 79 characters
+set textwidth=99          " hard wrap at 99 characters
 set modeline              " check for a modeline
 set softtabstop=4         " see spaces as tabs
 set scrolloff=5           " start scrolling when cursor is N lines from edge
