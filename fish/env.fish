@@ -12,3 +12,8 @@ end
 if not set -q __fish_color_blue
    set -gx __fish_color_blue (set_color -o blue)
 end
+
+# ------------------------------
+# Env Variables
+set -gx PATH $HOME/.poetry/bin $PATH
+set -gx PATH $HOME/.cargo/bin $PATH
