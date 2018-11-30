@@ -17,3 +17,7 @@ end
 # Env Variables
 set -gx PATH $HOME/.poetry/bin $PATH
 set -gx PATH $HOME/.cargo/bin $PATH
+
+if not set -q TERMINAL
+    set -gx TERMINAL hyper
+end
