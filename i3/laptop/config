@@ -38,6 +38,14 @@ focus_follows_mouse no
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
 
+# modify volume from media buttons
+bindsym XF86AudioRaiseVolume exec amixer set 'Master' 1%+
+bindsym XF86AudioLowerVolume exec amixer set 'Master' 1%-
+bindsym XF86AudioMute exec amixer set 'Master' toggle
+
+# lock screen
+bindsym $mod+Control+l exec i3lock -c 000000
+
 # kill focused window
 bindsym $mod+Shift+q kill
 
