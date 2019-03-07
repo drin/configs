@@ -10,6 +10,8 @@ function gentex
    if test -f $base_filename.tex
       echo "Generating pdf for $base_filename.tex"
       latex  $base_filename.tex
+      bibtex $base_filename
+      latex  $base_filename.tex
       latex  $base_filename.tex
       dvips  $base_filename.dvi
       ps2pdf $base_filename.ps
