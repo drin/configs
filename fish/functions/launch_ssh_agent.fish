@@ -21,6 +21,6 @@ function launch_ssh_agent
       end
 
      set -gx SSH_AGENT_PID (pgrep ssh-agent)
-     set -gx SSH_AUTH_SOCK (find /tmp -name 'agent.[[:digit:]]*' -type s)
+     set -gx SSH_AUTH_SOCK (find /tmp -name 'agent.[[:digit:]]*' -type s 2> /dev/null)
    end
 end
