@@ -2,25 +2,27 @@
 # Function to launch ssh agent and properly export SSH AGENT environment
 # variables via a python script
 function launch_ssh_agent
-   if test -z $SSH_AGENT_PID
-      echo "Launching new ssh agent..."
+    set running_agent_pid (pgrep ssh-agent)
 
-      eval (ssh-agent -c | sed 's/^setenv/set -Ux/')
+    if test -z $running_agent_pid
+        echo "Launching new ssh agent..."
 
-   else
-      echo "ssh agent already running."
+        eval (ssh-agent -c | sed 's/^setenv/set -gx/')
 
-      if set -q SSH_AGENT_PID
-          echo "clearing SSH_AGENT_PID: $SSH_AGENT_PID"
-          set -ge SSH_AGENT_PID
-      end
+    else
+        echo "ssh agent already running."
 
-      if set -q SSH_AUTH_SOCK
-          echo "clearing SSH_AUTH_SOCK: $SSH_AUTH_SOCK"
-          set -ge SSH_AUTH_SOCK
-      end
+        if test -n SSH_AGENT_PID
+            echo "clearing SSH_AGENT_PID: $SSH_AGENT_PID"
+            set -ge SSH_AGENT_PID
+        end
 
-     set -gx SSH_AGENT_PID (pgrep ssh-agent)
-     set -gx SSH_AUTH_SOCK (find /tmp -name 'agent.[[:digit:]]*' -type s)
-   end
+        if test -n SSH_AUTH_SOCK
+            echo "clearing SSH_AUTH_SOCK: $SSH_AUTH_SOCK"
+            set -ge SSH_AUTH_SOCK
+        end
+
+        set -gx SSH_AGENT_PID $running_agent_pid
+        set -gx SSH_AUTH_SOCK (find /tmp -name 'agent.[[:digit:]]*' -type s)
+    end
 end
