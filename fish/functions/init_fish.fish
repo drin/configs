@@ -21,5 +21,7 @@ function init_fish
    set -Ux GIT_EDITOR vim
    set -gx PAGER less
 
-   launch_ssh_agent
+   if test -f /usr/bin/ssh-agent
+       launch_ssh_agent
+   end
 end
