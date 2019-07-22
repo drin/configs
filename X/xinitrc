@@ -33,4 +33,7 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
+# set wallpaper
+#feh --bg-center /path/to/background-image.[jpg,png] # (anything supported by imlib2
+
 exec i3
