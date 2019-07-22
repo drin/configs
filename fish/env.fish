@@ -1,4 +1,4 @@
-if test $__fish_initialized -ne 1
+if test -z $__fish_initialized
     echo "=> Initializing Fish environment"
 
     set -gx __fish_initialized 1
