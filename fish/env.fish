@@ -8,7 +8,7 @@ if test -z $__fish_initialized
     # Prompt variables
     # Just calculate these once, to save a few cycles when displaying the prompt
     if not set -q __fish_prompt_hostname
-        if test -f /usr/bin/hostname
+        if test -n (type hostname)
             set -gx __fish_prompt_hostname (hostname)
         else
             set -gx __fish_prompt_hostname "octalene-container"
