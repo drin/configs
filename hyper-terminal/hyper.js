@@ -4,23 +4,23 @@
 
 module.exports = {
   // format: [@org/]project[#version]
-  plugins     : ['hyper-native-window-decoration', "hyper-night-owl"],
+  plugins     : ['hyper-native-window-decoration', "hyper-monokai-extended"],
 
   // directory under `~/.hyper_plugins/local/` to load without being `npm install`ed
   localPlugins: [],
 
   keymaps     : {
-    "pane:prev": "alt+k",
-    "pane:next": "alt+j",
+    "pane:prev"     : "alt+k",
+    "pane:next"     : "alt+j",
     "plugins:update": "alt+shift+u",
   },
 
   config      : {
     // 'stable' | 'canary'
-    updateChannel     : 'stable',
+    updateChannel     : 'canary',
 
     // font family with optional fallbacks
-    fontFamily        : 'Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
+    fontFamily        : '"Fira Mono", "DejaVu Sans Mono", consolas, "Lucida Console", monospace',
     fontSize          : 12,
 
     // 'normal' | 'bold'
