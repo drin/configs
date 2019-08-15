@@ -35,7 +35,7 @@ module.exports = {
     cursorAccentColor : '#000',
 
     foregroundColor   : '#fff',
-    backgroundColor   : '#000',
+    backgroundColor   : '#222',
     selectionColor    : 'rgba(248,28,229,0.3)',
     borderColor       : '#333',
 
@@ -43,7 +43,7 @@ module.exports = {
     termCSS           : '',
     padding           : '0px',
 
-    showHamburgerMenu : true,
+    showHamburgerMenu : false,
     showWindowControls: false,
 
     shell             : '',
@@ -56,6 +56,8 @@ module.exports = {
     quickEdit         : true,
     copyOnSelect      : true,
     defaultSSHApp     : true,
+
+    opacity           : 0.7,
   },
 
   // the full list. if you're going to provide the full color palette,
