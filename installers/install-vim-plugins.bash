@@ -84,45 +84,46 @@ function pull_plugins {
 }
 
 function setup_vim {
-    # setup base vim directories
+    # ------------------------------
+    # create various directories if necessary
+
+    # base vim directories (typically in $HOME)
     prepare_dir  $HOME_VIM_DIR 
     prepare_dir  $VIM_VIEW_DIR 
     prepare_dir  $VIM_SWAP_DIR 
 
-    # setup vim plugins
+    # target directories to clone vim plugins and vim colors into
     prepare_dir  $PLUGIN_DIR
-    pull_plugins $PLUGIN_REPO_LIST $PLUGIN_DIR
-    link_dir     $VIM_BUNDLE_DIR   $PLUGIN_DIR
-
-    # setup vim colors
     prepare_dir  $COLOR_DIR
-    pull_plugins $COLOR_REPO_LIST  $COLOR_DIR
-    link_dir     $VIM_COLOR_DIR    $COLOR_DIR
 
-    # setup pathogen plugin
+    # ------------------------------
+    # clone repos for vim plugins and vim colors
+    pull_plugins $PLUGIN_REPO_LIST $PLUGIN_DIR
+    pull_plugins $COLOR_REPO_LIST  $COLOR_DIR
+
+    # ------------------------------
+    # color files need to be in the root color directory. Here we create hardlinks
+    for color_file in $(find $COLOR_DIR -name '*.vim' -type f); do
+        # name of hardlink to color file definition
+        color_file_name=$(basename "$color_file")
+        ln "$color_file" "$COLOR_DIR/$color_file_name"
+    done
+
+    # ------------------------------
+    # setup symlinks (typically from $HOME) and for pathogen plugin
+    link_dir     $VIM_BUNDLE_DIR   $PLUGIN_DIR
+    link_dir     $VIM_COLOR_DIR    $COLOR_DIR
     link_dir     $VIM_AUTOLOAD_DIR $PATHOGEN_LOAD_DIR
 }
 
 function cleanup_vim {
-    # cleanup vim plugins
-    while read plugin_repo_uri; do
-        plugin_name=$(name_from_repo_uri $plugin_repo_uri)
+    # cleanup symlinks from $HOME to vim plugins and vim colors
+    rm $VIM_BUNDLE_DIR
+    rm $VIM_COLOR_DIR
 
-        if [[ ! -e "$PLUGIN_DIR/$plugin_name" ]]; then
-            rm -rf "$PLUGIN_DIR/$plugin_name"
-        fi
-
-    done < "$CONFIG_ROOT/$PLUGIN_REPO_LIST"
-
-    # cleanup vim color configurations
-    while read color_repo_uri; do
-        plugin_name=$(name_from_repo_uri $color_repo_uri)
-
-        if [[ ! -e "$COLOR_DIR/$plugin_name" ]]; then
-            rm -rf "$COLOR_DIR/$plugin_name"
-        fi
-
-    done < "$CONFIG_ROOT/$COLOR_REPO_LIST"
+    # cleanup cloned repos for vim plugins and vim colors
+    rm -rf "$PLUGIN_DIR"
+    rm -rf "$COLOR_DIR"
 }
 
 
