@@ -4,7 +4,7 @@
 
 module.exports = {
   // format: [@org/]project[#version]
-  plugins     : ["hyper-native-window-decoration", "hyperpanic"],
+  plugins     : ['hyper-native-window-decoration', "hyper-monokai-extended"],
 
   // directory under `~/.hyper_plugins/local/` to load without being `npm install`ed
   localPlugins: [],
@@ -17,11 +17,11 @@ module.exports = {
 
   config      : {
     // 'stable' | 'canary'
-    updateChannel     : 'stable',
+    updateChannel     : 'canary',
 
     // font family with optional fallbacks
-    fontFamily        : 'Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
-    fontSize          : 15,
+    fontFamily        : '"Fira Mono", "DejaVu Sans Mono", consolas, "Lucida Console", monospace',
+    fontSize          : 12,
 
     // 'normal' | 'bold'
     fontWeight        : 'normal',
