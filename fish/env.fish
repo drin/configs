@@ -1,7 +1,7 @@
-if test -z $__fish_initialized
+if test -z $__custom_fish_config_initialized
     echo "=> Initializing Fish environment"
 
-    set -gx __fish_initialized 1
+    set -gx __custom_fish_config_initialized 1
     set -gx FISH_CONFIG_HOME $HOME/.config/fish
 
     # ------------------------------
@@ -25,23 +25,23 @@ if test -z $__fish_initialized
 
     # ------------------------------
     # Env Variables
-    set -Ux EDITOR     vim
-    set -Ux GIT_EDITOR vim
+    set -Ux EDITOR                                   vim
+    set -Ux GIT_EDITOR                               vim
 
-    set -gx PAGER      less
-    set -gx PYENV_ROOT $HOME/code/tools/python/pyenv
+    set -gx PAGER                                    less
+    set -gx PYENV_ROOT                               $HOME/code/tools/python/pyenv
+    set -gx npm_config_prefix                        $HOME/.npm_modules
 
     set -gx PATH $HOME/.poetry/bin                   $PATH
     set -gx PATH $HOME/.cargo/bin                    $PATH
     set -gx PATH $PYENV_ROOT/bin                     $PATH
     set -gx PATH $HOME/toolbox                       $PATH
+    set -gx PATH $HOME/toolbox/clion-2019.3.4/bin    $PATH
     set -gx PATH $HOME/toolbox/h5/bin                $PATH
     set -gx PATH $HOME/toolbox/pyflame/bin           $PATH
-    set -gx PATH $HOME/toolbox/cellranger/bin        $PATH
-    set -gx PATH $HOME/toolbox/cellranger/tenkit/bin $PATH
 
     if not set -q TERMINAL
-        set -gx TERMINAL hyper
+        set -Ux TERMINAL alacritty
     end
 
     # ------------------------------
