@@ -6,7 +6,8 @@ function go-path
 
     if ! test -d $GOPATH
         echo "creating new go path: $GOPATH"
-        mkdir -p $GOPATH
+        # mkdir -p $GOPATH
+        ln -s (pwd) $GOPATH
     else
         echo "using go path: $GOPATH"
     end
