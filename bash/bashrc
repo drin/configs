@@ -2,30 +2,29 @@
 # ~/.bashrc
 #
 
-# make sure I'm in my home directory
-#cd
-
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
 PS1='[\u@\h \W]\$ '
 
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+fi
+
 # function definitions
 if [ -f ~/.bash_functions ]; then
-   . ~/.bash_functions
-   echo "===> Loaded bash functions"
+    . ~/.bash_functions
+    echo "===> Loaded bash functions"
 fi
 
 # alias definitions
 if [ -f ~/.bash_aliases ]; then
-   . ~/.bash_aliases
-   echo "===> Loaded bash aliases"
+    . ~/.bash_aliases
+    echo "===> Loaded bash aliases"
 fi
 
 # Load environment last so that functions and aliases may be used
 if [[ -f ~/.bash_environment ]]; then
-   . ~/.bash_environment
-   echo "===> Loaded bash environment"
+    . ~/.bash_environment
+    echo "===> Loaded bash environment"
 fi
-
-exec fish
