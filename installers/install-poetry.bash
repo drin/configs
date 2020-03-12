@@ -20,4 +20,4 @@ else
 fi
 
 source $HOME/.poetry/env
-poetry self:update
+poetry self update
