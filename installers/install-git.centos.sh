@@ -7,6 +7,8 @@ pushd ${HOME}/installers
 if [ ! -d "git-2.25.1" ]; then
     echo "Downloading and extracting git source..."
 
+    # eventually automate getting most recent version from:
+    # https://mirrors.edge.kernel.org/pub/software/scm/git/
     wget https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.25.1.tar.xz
     tar -xzf git-2.25.1.tar.xz
 else
