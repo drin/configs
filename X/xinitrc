@@ -34,6 +34,7 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
 fi
 
 # set wallpaper
-#feh --bg-center /path/to/background-image.[jpg,png] # (anything supported by imlib2
+# feh --bg-center "/raiddata/picture-gallery/wallpapers/desktopography - mushroomstone - 2560x1440.jpg"
+feh --bg-max "/raiddata/picture-gallery/wallpapers/Wikimedia Commons - Crimea - Mount Ai Petri - Low Clouds.jpg" "/raiddata/picture-gallery/wallpapers/Wikimedia Commons - Philippines - Blue Water Cave.jpg"
 
 exec i3
