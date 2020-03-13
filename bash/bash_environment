@@ -6,5 +6,13 @@ if [[ $BASH_ENV_LOADED != 1 ]]; then
     export EDITOR=vim
     export TERMINAL=alacritty
 
+    export PYENV_ROOT=$HOME/toolbox/pyenv
+
     export PATH=$PATH:/usr/local/bin:$HOME/.local/bin:$HOME/bin
+    export PATH=$HOME/toolbox/git/bin:$PATH
+    export PATH=$HOME/.poetry/bin:$PATH
+    export PATH=$PYENV_ROOT/bin:$PATH
+    export PATH=/mnt/sdb/skyhookdm-ceph/build/bin:$PATH
+
+    eval "$(pyenv init -)"
 fi
