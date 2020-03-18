@@ -8,14 +8,14 @@ if [[ $BASH_ENV_LOADED != 1 ]]; then
 
     export PATH=$PATH:/usr/local/bin:$HOME/.local/bin:$HOME/bin
 
-    # for when poetry is installed
-    export PATH=$HOME/.poetry/bin:$PATH
-
     # for when git is installed (necessary on centos machines)
     # export PATH=$HOME/toolbox/git/bin:$PATH
 
     # for when skyhook is installed. Typically for cloudlab machines
     # export PATH=/mnt/sdb/skyhookdm-ceph/build/bin:$PATH
+
+    # for when poetry is installed
+    export PATH=$HOME/.poetry/bin:$PATH
 
     # for when pyenv is installed
     export PYENV_ROOT=$HOME/toolbox/pyenv
