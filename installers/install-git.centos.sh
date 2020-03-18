@@ -10,7 +10,7 @@ if [ ! -d "git-2.25.1" ]; then
     # eventually automate getting most recent version from:
     # https://mirrors.edge.kernel.org/pub/software/scm/git/
     wget https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.25.1.tar.xz
-    tar -xzf git-2.25.1.tar.xz
+    tar -xJf git-2.25.1.tar.xz
 else
     echo "Using existing git source..."
 fi
