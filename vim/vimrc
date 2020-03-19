@@ -3,8 +3,6 @@
 " ------------------------------------------------
 
 
-
-
 " Basic Setup
 " -----------
 set encoding=utf-8
@@ -110,6 +108,7 @@ au BufRead,BufNewFile *.less       set ft=less
 
 
 " programming language filetypes
+au BufRead,BufNewFile *.flake8     set ft=dosini
 au BufRead,BufNewFile *.g          set ft=antlr
 au BufRead,BufNewFile [Mm]akefile* set noet ts=8 sw=8 nocindent list lcs=tab:>-,trail:x
 
@@ -121,7 +120,6 @@ au BufRead,BufNewFile *.fs         set ft=fs
 "au BufRead,BufNewFile *.bib highlight clear OverLength
 
 " <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
 
 
 " Special Key Mappings
@@ -141,6 +139,9 @@ au BufRead,BufNewFile *.fs         set ft=fs
 
 " And all the cool kids need to paste
 :nnoremap <C-p><C-p> :set invpaste<CR>
+
+" Convenience for toggling Syntastic
+:nnoremap <C-s><C-s> :SyntasticToggleMode<CR>
 
 " Use the space key to open and close code folds
 :vnoremap <space> zf<CR>
@@ -167,7 +168,6 @@ au BufRead,BufNewFile *.fs         set ft=fs
 " <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
-
 " Pathogen/plugin management
 " --------------------------
 
@@ -179,8 +179,9 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+let g:syntastic_auto_loc_list            = 1
+let g:syntastic_check_on_open            = 1
+let g:syntastic_check_on_wq              = 0
+let g:syntastic_tex_checkers             = ['lacheck']
 
 " <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
