@@ -20,11 +20,13 @@ path_to_configs_alacritty="${CONFIG_ROOT}/alacritty"
 path_to_home_fish="${path_to_home_config}/fish"
 path_to_home_alacritty="${path_to_home_config}/alacritty"
 
+
 # ------------------------------
 # Make directory: $HOME/.config
 if [[ ! -d ${path_to_home_config} ]]; then
     mkdir -p ${path_to_home_config}
 fi
+
 
 # ------------------------------
 # Bash setup
@@ -44,6 +46,11 @@ if [[ ! -d ${path_to_home_fish} ]]; then
 else
    echo "fish config home already setup. Skipping..."
 fi
+
+if [[ -f /etc/os-release && -n $(grep "Ubuntu" /etc/os-release) ]]; then
+    sudo apt-get -y install fish
+fi
+
 
 # ------------------------------
 # Alacritty setup
