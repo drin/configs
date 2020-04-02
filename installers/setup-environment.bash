@@ -8,6 +8,8 @@ if [[ -z $CONFIG_ROOT ]]; then
     exit 1
 fi
 
+sudo apt-get -y update
+
 # ------------------------------
 # Variables
 
