@@ -8,7 +8,9 @@ if [[ -z $CONFIG_ROOT ]]; then
     exit 1
 fi
 
-sudo apt-get -y update
+if [[ -f /etc/os-release && -n $(grep "Ubuntu" /etc/os-release) ]]; then
+    sudo apt-get -y update
+fi
 
 # ------------------------------
 # Variables
