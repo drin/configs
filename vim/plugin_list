@@ -1,7 +1,7 @@
-https://github.com/tpope/vim-pathogen.git
-https://github.com/bling/vim-airline.git
-https://github.com/scrooloose/nerdtree.git
-https://github.com/scrooloose/syntastic.git
-https://github.com/Shougo/neocomplete.vim.git
-https://github.com/rust-lang/rust.vim.git
-https://github.com/dag/vim-fish.git
+vim-pathogen https://github.com/tpope/vim-pathogen.git
+vim-airline  https://github.com/bling/vim-airline.git
+nerdtree     https://github.com/scrooloose/nerdtree.git
+syntastic    https://github.com/scrooloose/syntastic.git
+neocomplete  https://github.com/Shougo/neocomplete.vim.git
+rust         https://github.com/rust-lang/rust.vim.git
+vim-fish     https://github.com/dag/vim-fish.git
