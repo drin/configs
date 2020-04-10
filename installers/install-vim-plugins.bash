@@ -62,7 +62,11 @@ function pull_plugins {
     repo_list_file=$1
     plugin_dir=$2
 
-    while read vim_plugin_repo; do
+    while read vim_plugin_entry; do
+	# reduce many whitespace to 1, and then use cut.
+        vim_plugin_path="$(cut -f1 -d' ' <<<"$(echo $vim_plugin_entry | sed 's/ \+/ /g')")"
+        vim_plugin_repo="$(cut -f2 -d' ' <<<"$(echo $vim_plugin_entry | sed 's/ \+/ /g')")"
+
         plugin_name=$(name_from_repo_uri $vim_plugin_repo)
 
         echo "checking for plugin '$plugin_dir/$plugin_name'..."
@@ -72,7 +76,7 @@ function pull_plugins {
         else
             if [[ ! -d "$plugin_dir/$plugin_name" ]]; then
                 set -x
-                git -C $plugin_dir clone $vim_plugin_repo
+                git -C $plugin_dir clone $vim_plugin_repo $vim_plugin_path
 
                 set +x
             else
