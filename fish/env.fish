@@ -29,8 +29,9 @@ if test -z $__custom_fish_config_initialized
     set -Ux GIT_EDITOR                               vim
 
     set -gx PAGER                                    less
-    set -gx PYENV_ROOT                               $HOME/code/tools/python/pyenv
+    set -gx PYENV_ROOT                               $HOME/toolbox/pyenv
     set -gx npm_config_prefix                        $HOME/.npm_modules
+    set -gx fish_user_paths                          $PYENV_ROOT/bin $fish_user_paths
 
     set -gx PATH $HOME/.poetry/bin                   $PATH
     set -gx PATH $HOME/.cargo/bin                    $PATH
@@ -54,6 +55,7 @@ if test -z $__custom_fish_config_initialized
     # ------------------------------
     # Load PyEnv
     if test -f $PYENV_ROOT/bin/pyenv
+        echo "Initializing pyenv..."
         pyenv init - | source
     end
 end
