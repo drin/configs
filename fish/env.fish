@@ -37,19 +37,9 @@ if test -z $__custom_fish_config_initialized
     set -gx PATH $HOME/.cargo/bin                    $PATH
     set -gx PATH $PYENV_ROOT/bin                     $PATH
     set -gx PATH $HOME/toolbox                       $PATH
-    set -gx PATH $HOME/toolbox/clion-2019.3.4/bin    $PATH
-    set -gx PATH $HOME/toolbox/h5/bin                $PATH
-    set -gx PATH $HOME/toolbox/pyflame/bin           $PATH
 
     if not set -q TERMINAL
         set -Ux TERMINAL alacritty
-    end
-
-    # ------------------------------
-    # Load Google Cloud SDK
-    set gcloud_home "$HOME/packages/source/google-cloud-sdk/google-cloud-sdk"
-    if test -f $gcloud_home
-        . $gcloud_home/path.fish.inc
     end
 
     # ------------------------------
