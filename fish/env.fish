@@ -30,27 +30,17 @@ if test -z $__custom_fish_config_initialized
 
     set -gx PAGER                                    less
     set -gx PYENV_ROOT                               $HOME/toolbox/pyenv
-    set -gx npm_config_prefix                        $HOME/.npm_modules
     set -gx fish_user_paths                          $PYENV_ROOT/bin $fish_user_paths
 
+    set -gx PATH /usr/local/bin                      $PATH
     set -gx PATH $HOME/.poetry/bin                   $PATH
-    set -gx PATH $HOME/.cargo/bin                    $PATH
     set -gx PATH $PYENV_ROOT/bin                     $PATH
     set -gx PATH $HOME/toolbox                       $PATH
-    set -gx PATH $HOME/toolbox/clion-2019.3.4/bin    $PATH
-    set -gx PATH $HOME/toolbox/h5/bin                $PATH
-    set -gx PATH $HOME/toolbox/pyflame/bin           $PATH
 
     if not set -q TERMINAL
         set -Ux TERMINAL alacritty
     end
 
-    # ------------------------------
-    # Load Google Cloud SDK
-    set gcloud_home "$HOME/packages/source/google-cloud-sdk/google-cloud-sdk"
-    if test -f $gcloud_home
-        . $gcloud_home/path.fish.inc
-    end
 
     # ------------------------------
     # Load PyEnv
