@@ -30,11 +30,11 @@ if test -z $__custom_fish_config_initialized
 
     set -gx PAGER                                    less
     set -gx PYENV_ROOT                               $HOME/toolbox/pyenv
-    set -gx npm_config_prefix                        $HOME/.npm_modules
 
     set -gx PATH $HOME/.poetry/bin                   $PATH
     set -gx PATH $PYENV_ROOT/bin                     $PATH
     set -gx PATH $HOME/toolbox                       $PATH
+    set -gx PATH /usr/lib/postgresql/13/bin          $PATH
 
     if not set -q TERMINAL
         set -Ux TERMINAL alacritty
