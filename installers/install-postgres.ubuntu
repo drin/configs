@@ -22,4 +22,4 @@ fi
 
 wget --quiet -O - "${keys_uri}" | sudo apt-key add -
 sudo apt-get update
-sudo apt-get -y install postgresql
+sudo apt-get -y install postgresql libpq-dev
