@@ -5,3 +5,4 @@ syntastic    https://github.com/scrooloose/syntastic.git
 neocomplete  https://github.com/Shougo/neocomplete.vim.git
 rust         https://github.com/rust-lang/rust.vim.git
 vim-fish     https://github.com/dag/vim-fish.git
+pgsql        https://github.com/lifepillar/pgsql.vim

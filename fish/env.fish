@@ -30,6 +30,7 @@ if test -z $__custom_fish_config_initialized
 
     set -gx PAGER                                    less
     set -gx PYENV_ROOT                               $HOME/toolbox/pyenv
+    set -gx fish_user_paths                          $PYENV_ROOT/bin $fish_user_paths
 
     set -gx PATH $HOME/.poetry/bin                   $PATH
     set -gx PATH $PYENV_ROOT/bin                     $PATH
@@ -43,6 +44,7 @@ if test -z $__custom_fish_config_initialized
     # ------------------------------
     # Load PyEnv
     if test -f $PYENV_ROOT/bin/pyenv
+        echo "Initializing pyenv..."
         pyenv init - | source
     end
 end
