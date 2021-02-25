@@ -1,0 +1,43 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+PS1='[\u@\h \W]\$ '
+
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+fi
+
+# function definitions
+if [ -f ~/.bash_functions ]; then
+    . ~/.bash_functions
+    echo "===> Loaded bash functions"
+fi
+
+# alias definitions
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+    echo "===> Loaded bash aliases"
+fi
+
+# Load environment last so that functions and aliases may be used
+if [[ -f ~/.bash_environment ]]; then
+    . ~/.bash_environment
+    echo "===> Loaded bash environment"
+fi
+
+# ------------------------------
+# From an ubuntu bashrc; looked cool
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+fi
