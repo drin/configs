@@ -1,5 +1,5 @@
 function build-book
-    set owner_id octalene
+    set owner_id  octalene
     set owner_gid http
 
     set build_dir (string replace -a '"' '' (grep "build-dir" book.toml | cut -d" " -f3))
@@ -15,7 +15,9 @@ function build-book
 
     if test $build_dir_owners[1] = $owner_id; and test $build_dir_owners[2] = $owner_gid
         echo "Ownership correctly set."
+
     else
         echo "Invalid ownership"
+
     end
 end
