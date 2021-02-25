@@ -1,0 +1,9 @@
+#!/bin/bash
+
+
+# ------------------------------
+# Function definitions
+
+
+# Signal that this file was invoked
+echo "===> Loaded bash functions"

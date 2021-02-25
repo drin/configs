@@ -1,0 +1,46 @@
+#!/bin/bash
+
+
+# ------------------------------
+# User bash environment configuration
+
+
+# ..............................
+# Non-idempotent configuration (execute once per environment)
+if [[ ${BASH_ENV_LOADED} -eq 0 ]]; then
+    export BASH_ENV_LOADED=$(( 1 ))
+
+    # bank the vanilla path for convenience
+    export default_path="${PATH}"
+
+    # If we don't have terminfo built, use xterm
+    if [[ $(find "${HOME}/.terminfo" -name '*alacritty*' | wc -l) -eq 2 ]]; then
+        export TERMINAL=alacritty
+
+    else
+        export TERMINAL=xterm-256color
+
+    fi
+
+    # if pyenv is available, initialize it for this environment
+    type pyenv > /dev/null 2>&1
+    if [ $? -eq 0 ]; then
+        eval "$(pyenv init -)"
+    fi
+fi
+
+
+# ..............................
+# Idempotent configuration (may be executed many times)
+
+homebrew_path="/opt/homebrew/bin/"
+
+# Reconstruct PATH using the vanilla PATH
+export PATH=${homebrew_path}:${default_path}
+export GIT_EDITOR=vim
+export EDITOR=vim
+export PAGER=less
+
+
+# Signal that this file was invoked
+echo "===> Loaded bash environment"

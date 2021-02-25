@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# ------------------------------
+# Global and command-line args
+
+config_root="${1:?"Please provide the top-level config directory"}"
+
+bash_configs="${config_root}/mac/bash"
+fish_configdir="${config_root}/mac/fish"
+alacritty_configdir="${config_root}/mac/alacritty"
+
+config_dirpath="${HOME}/.config"
+symlink_fishconfig="${config_dirpath}/fish"
+symlink_alacrittyconfig="${config_dirpath}/alacritty"
+
+
+# ------------------------------
+# Configuration
+
+# Create the base ".config" directory
+mkdir -p ${config_dirpath}
+
+# Bash setup
+for config_file in $(ls "${bash_configs}"); do
+    symlink_filepath="${HOME}/.${config_file}"
+    config_filepath="${bash_configs}/${config_file}"
+
+    if [[ ! -f "${HOME}/.${config_file}" ]]; then
+        ln -s "${config_filepath}" "${symlink_filepath}"
+
+    else
+        echo "Skipping existing file: '${symlink_filepath}'"
+
+    fi
+done
+
+# Fish setup
+if [[ ! -d "${symlink_fishconfig}" ]]; then
+   ln -s "${fish_configdir}" "${symlink_fishconfig}"
+
+else
+   echo "fish config exists. Skipping..."
+
+fi
+
+# Alacritty setup
+if [[ ! -d "${symlink_alacrittyconfig}" ]]; then
+    ln -s "${alacritty_configdir}" "${symlink_alacrittyconfig}"
+
+else
+    echo "alacritty config exists. Skipping..."
+fi
