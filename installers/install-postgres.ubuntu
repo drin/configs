@@ -1,0 +1,25 @@
+#!/usr/bin/bash
+
+keys_uri="https://www.postgresql.org/media/keys/ACCC4CF8.asc"
+apt_source_listfile="/etc/apt/sources.list.d/pgdg.list"
+local_apt_source_listfile="packages/apt/pgdg.list"
+
+if [[ ! -f "${apt_source_listfile}" ]]; then
+    if [[ -f "${local_apt_source_listfile}" ]]; then
+        sudo cp "${local_apt_source_listfile}" "${apt_source_listfile}"
+
+    else
+        if [[ -f "../${local_apt_source_listfile}" ]]; then
+            sudo cp "../${local_apt_source_listfile}" "${apt_source_listfile}"
+
+        else
+            echo "Could not find apt source list: '${local_apt_source_listfile}'"
+            exit 1
+        fi
+    fi
+
+fi
+
+wget --quiet -O - "${keys_uri}" | sudo apt-key add -
+sudo apt-get update
+sudo apt-get -y install postgresql libpq-dev

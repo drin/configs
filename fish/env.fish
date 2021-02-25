@@ -24,19 +24,24 @@ if test -z $__custom_fish_config_initialized
     end
 
     # ------------------------------
-    # Env Variables
+    # Common env variables
     set -Ux EDITOR                                   vim
     set -Ux GIT_EDITOR                               vim
+    set -Ux PAGER                                    less
 
-    set -gx PAGER                                    less
-    set -gx PYENV_ROOT                               $HOME/toolbox/pyenv
-    set -gx npm_config_prefix                        $HOME/.npm_modules
-    set -gx fish_user_paths                          $PYENV_ROOT/bin $fish_user_paths
+    # ------------------------------
+    # Tool-based variables
+    set -gx PYENV_ROOT            $HOME/toolbox/pyenv
+    set -gx npm_config_prefix     $HOME/.npm_modules
 
-    set -gx PATH $HOME/.poetry/bin                   $PATH
-    set -gx PATH $HOME/.cargo/bin                    $PATH
-    set -gx PATH $PYENV_ROOT/bin                     $PATH
-    set -gx PATH $HOME/toolbox                       $PATH
+    set pyenv_path                $PYENV_ROOT/bin
+    set poetry_path               $HOME/.poetry/bin
+
+    set -gx fish_user_paths       $HOME/toolbox $pyenv_path $poetry_path $fish_user_paths
+
+    # ------------------------------
+    # Variables to merge later
+    # set -gx PATH /usr/lib/postgresql/13/bin          $PATH
 
     if not set -q TERMINAL
         set -Ux TERMINAL alacritty
