@@ -1,12 +1,17 @@
+#!/opt/homebrew/bin/fish
+
+
+# ------------------------------
+# Global variables
+
+
+# ------------------------------
+# User environment
 if test -z $__custom_fish_config_initialized
     echo "=> Initializing Fish environment"
-
     set -gx __custom_fish_config_initialized 1
-    set -gx FISH_CONFIG_HOME $HOME/.config/fish
 
-    # ------------------------------
-    # Prompt variables
-    # Just calculate these once, to save a few cycles when displaying the prompt
+    # Prompt content (calculate once for efficiency)
     if not set -q __fish_prompt_hostname
         if test -n (type hostname)
             set -gx __fish_prompt_hostname (hostname)
@@ -15,6 +20,7 @@ if test -z $__custom_fish_config_initialized
         end
     end
 
+    # Prompt colors
     if not set -q __fish_prompt_normal
         set -gx __fish_prompt_normal (set_color normal)
     end
@@ -25,34 +31,32 @@ if test -z $__custom_fish_config_initialized
 
     # ------------------------------
     # Common env variables
-    set -Ux EDITOR                                   vim
-    set -Ux GIT_EDITOR                               vim
-    set -Ux PAGER                                    less
+    set -Ux GIT_EDITOR  vim
+    set -Ux EDITOR      vim
+    set -Ux PAGER       less
 
     # ------------------------------
     # Tool-based variables
     set -gx PYENV_ROOT            $HOME/toolbox/pyenv
     set -gx npm_config_prefix     $HOME/.npm_modules
 
-    set pyenv_path                $PYENV_ROOT/bin
-    set poetry_path               $HOME/.poetry/bin
+    set homebrew_path "/opt/homebrew/bin/"
+    set toolbox_path  "$HOME/toolbox"
+    set cargo_path    "$HOME/.cargo/bin"
 
-    set -gx fish_user_paths       $HOME/toolbox $pyenv_path $poetry_path $fish_user_paths
-
-    # ------------------------------
-    # Variables to merge later
-    # set -gx PATH /usr/lib/postgresql/13/bin          $PATH
+    set -gx fish_user_paths       $toolbox_path $homebrew_path $cargo_path $fish_user_paths
 
     if not set -q TERMINAL
         set -Ux TERMINAL alacritty
     end
 
-    # ------------------------------
-    # Load PyEnv
+    # If pyenv is installed, make sure it's been initialized
     if test -f $PYENV_ROOT/bin/pyenv
         echo "Initializing pyenv..."
         pyenv init - | source
     end
 end
 
+
+# Signal that this file has been invoked
 echo "-- Fish environment initialized"

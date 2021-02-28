@@ -1,0 +1,15 @@
+#!/bin/bash
+
+
+# ------------------------------
+# Variables
+
+homebrew_uri="https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh"
+
+
+# ------------------------------
+# Installations
+
+/bin/bash -c "$(curl -fsSL "${homebrew_uri}")"
+
+
