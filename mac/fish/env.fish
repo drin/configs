@@ -37,21 +37,19 @@ if test -z $__custom_fish_config_initialized
 
     # ------------------------------
     # Tool-based variables
-    set -gx PYENV_ROOT            $HOME/toolbox/pyenv
-    set -gx npm_config_prefix     $HOME/.npm_modules
+    set homebrew_path       "/opt/homebrew/bin/"
+    set toolbox_path        "$HOME/toolbox"
+    set cargo_path          "$HOME/.cargo/bin"
 
-    set homebrew_path "/opt/homebrew/bin/"
-    set toolbox_path  "$HOME/toolbox"
-    set cargo_path    "$HOME/.cargo/bin"
-
-    set -gx fish_user_paths       $toolbox_path $homebrew_path $cargo_path $fish_user_paths
+    set -gx fish_user_paths $toolbox_path $homebrew_path $cargo_path $fish_user_paths
 
     if not set -q TERMINAL
         set -Ux TERMINAL alacritty
     end
 
     # If pyenv is installed, make sure it's been initialized
-    if test -f $PYENV_ROOT/bin/pyenv
+    which -s pyenv
+    if test $status -eq 0
         echo "Initializing pyenv..."
         pyenv init - | source
     end
