@@ -54,6 +54,7 @@ else
 fi
 
 if [[ -f /etc/os-release && -n $(grep "Ubuntu" /etc/os-release) ]]; then
+    sudo apt-add-repository -y ppa:fish-shell/release-3
     sudo apt-get -y install fish
 fi
 
