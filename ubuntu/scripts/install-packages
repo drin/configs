@@ -4,16 +4,9 @@
 # ------------------------------
 # Global and command-line Variables
 
-config_root="${1:?"Please provide path to the configurations directory"}"
-
 # package repositories
 ppa_fish="ppa:fish-shell/release-3"
 ppa_alacritty="ppa:mmstick76/alacritty"
-
-# credentials to grab packages
-keys_uri="https://www.postgresql.org/media/keys/ACCC4CF8.asc"
-pgdg_apt_destpath="/etc/apt/sources.list.d/pgdg.list"
-pgdg_apt_srcpath="${config_root}/ubuntu/packages/apt/pgdg.list"
 
 
 # ------------------------------
@@ -28,36 +21,23 @@ fi
 
 # ------------------------------
 # Main logic
+
+echo "[Packages] updating packages"
 sudo apt-get -y update
 
-# [fish] install repository and package
-echo "[fish] Adding repository, then installing package"
+echo "[Packages] adding apt repositories"
 sudo apt-add-repository -y "${ppa_fish}"
-sudo apt-get            -y install fish
+sudo apt-add-repository -y "${ppa_alacritty}"
 
-# [alacritty] install repository and package
-echo "[alacritty] Adding repository, then installing package"
-sudo add-apt-repository -y "${ppa_alacritty}"
-sudo apt-get            -y install alacritty
+echo "[Packages] installing packages"
+sudo apt-get -y install fish                  \
+                        alacritty             \
 
-# [postgresql] place repository info then install package
-echo "[postgresql] Adding repository, then installing package"
-if [[ ! -f "${pgdg_apt_destpath}" ]]; then
-    echo -e "\t>> Adding repository listing for postgresql"
+                        # for research
+                        postgresql libpq-dev  \
+                        zfsutils-linux        \
 
-    if [[ -f "${pgdg_apt_srcpath}" ]]; then
-        echo -e "\t>> Placing postgresql apt listing"
-        sudo cp "${pgdg_apt_srcpath}" "${pgdg_apt_destpath}"
-
-    else
-        echo "Could not find apt source list: '${pgdg_apt_srcpath}'"
-        exit 1
-    fi
-fi
-
-echo -e "\t>> Adding packages for postgresql"
-wget --quiet -O - "${keys_uri}" | sudo apt-key add -
-sudo apt-get -y install postgresql libpq-dev
-
-# [zfs] Installing package
-sudo apt-get -y install zfsutils-linux
+                        # python3 optional dependencies
+                        libffi-dev            \
+                        libbz2-dev            \
+                        libreadline-dev

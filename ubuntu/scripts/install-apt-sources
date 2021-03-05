@@ -1,0 +1,72 @@
+#!/bin/bash
+
+
+# ------------------------------
+# Global and command-line Variables
+
+apt_pkgsource_list="/etc/apt/sources.list.d"
+
+
+# ------------------------------
+# Validation
+
+if [[ ! -f "/etc/os-release" || -z $(grep "Ubuntu" "/etc/os-release") ]]; then
+    echo "Please double check your system:"
+    echo -e "\tExpected '/etc/os-release' to mention 'Ubuntu'"
+    exit 1
+fi
+
+
+# ------------------------------
+# Functions
+
+# >> PostgreSQL functions
+function add_pkgsrc_postgres() {
+    postgres_pkg_loc="deb http://apt.postgresql.org/pub/repos/apt bionic-pgdg main"
+
+    postgres_apt_destpath="${apt_pkgsource_list}/pgdg.list"
+    if [[ ! -f "${postgres_apt_destpath}" ]]; then
+        echo -e "\t>> [PostgreSQL] adding apt sources"
+
+        echo "${postgres_pkg_loc}" | sudo tee "${postgres_apt_destpath}"
+    fi
+}
+
+function add_keys_postgres() {
+    postgres_keys_uri="https://www.postgresql.org/media/keys/ACCC4CF8.asc"
+    wget --quiet -O - "${postgres_keys_uri}" | sudo apt-key add -
+}
+
+
+# >> LLVM functions
+function add_pkgsrc_llvm() {
+    llvm_deb_loc="deb     http://apt.llvm.org/bionic/ llvm-toolchain-bionic-11 main"
+    llvm_debsrc_loc="deb-src http://apt.llvm.org/bionic/ llvm-toolchain-bionic-11 main"
+
+    llvm_apt_destpath="/${apt_pkgsource_list}/llvm.list"
+    if [[ ! -f "${llvm_apt_destpath}" ]]; then
+        echo -e "\t>> [LLVM] adding apt sources"
+
+        echo "${llvm_deb_loc}"    | sudo tee    "${llvm_apt_destpath}"
+        echo "${llvm_debsrc_loc}" | sudo tee -a "${llvm_apt_destpath}"
+    fi
+}
+
+function add_keys_llvm() {
+    llvm_keys_uri="https://apt.llvm.org/llvm-snapshot.gpg.key"
+    wget --quiet -O - "${llvm_keys_uri}" | sudo apt-key add -
+}
+
+
+# ------------------------------
+# Main logic
+
+# [Package Sources]
+echo "[APT sources] Adding sources to '${apt_pkgsource_list}'"
+echo "$(add_pkgsrc_postgres)"
+echo "$(add_pkgsrc_llvm)"
+
+# [Developer keys]
+echo "[Dev keys] Adding dev keys"
+add_keys_postgres
+add_keys_llvm
