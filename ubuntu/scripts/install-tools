@@ -1,0 +1,42 @@
+#!/usr/bin/bash
+
+
+# ------------------------------
+# Global and command-line variables
+
+poetry_web_uri="https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py"
+pyenv_git_uri="https://github.com/pyenv/pyenv"
+
+path_to_poetry_env="${HOME}/.poetry/env"
+path_to_source_pyenv="$HOME/toolbox/pyenv"
+
+
+# ------------------------------
+# Main logic
+
+# >> Install (via download) Poetry (via get-poetry.py)
+if [[ -z $(type poetry 2> /dev/null) ]]; then
+    # install by running python
+    curl -sSL $poetry_web_uri | python3
+
+    if [[ -f "${path_to_poetry_env}" ]]; then
+        source "${path_to_poetry_env}"
+        poetry self update
+    fi
+fi
+
+
+# >> Install Pyenv
+if [[ -z $(type pyenv 2> /dev/null) ]]; then
+    # checkout the repo and it's usable out of the box
+    git clone "${pyenv_git_uri}" $path_to_source_pyenv
+    
+    # export these variables now for convenience
+    export PYENV_ROOT="$path_to_source_pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    
+    # run pyenv init so that this script can be sourced
+    if [[ -n $(command -v pyenv) ]]; then
+        eval "$(pyenv init -)"
+    fi
+fi
