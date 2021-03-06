@@ -1,14 +1,21 @@
-# .bash_profile
+#!/bin/bash
 
-# Source global profile settings
-if [ -f /etc/profile ]; then
-    source /etc/profile
-fi
 
-# Include user-specific aliases and functions
-if [ -f ~/.bashrc ]; then
-    . ~/.bashrc
-fi
+# ------------------------------
+# Global variables
 
-# adjust file/dir creation mask (group & other can read/exec)
+global_profile_path="/etc/profile"
+user_profile_path="${HOME}/.bashrc"
+
+
+# ------------------------------
+# Source existing config files
+
+[[ -f "${global_profile_path}" ]] && source "${global_profile_path}"
+[[ -f "${user_profile_path}"   ]] && .      "${user_profile_path}"
+
+
+# set file creation mask because, why not
 umask u=rwx,g=r,o=r
+
+export PATH="$HOME/toolbox/poetry/bin:$PATH"

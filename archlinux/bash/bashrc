@@ -1,43 +1,48 @@
-#
 # ~/.bashrc
-#
 
-# If not running interactively, don't do anything
+
+# ------------------------------
+# Global variables
+
+global_config_path="/etc/bashrc"
+
+user_function_path="${HOME}/.bash_functions"
+user_aliases_path="${HOME}/.bash_aliases"
+user_environ_path="${HOME}/.bash_environment"
+
+
+# ------------------------------
+# Validation
+
+# If not interactive, don't do anything
 [[ $- != *i* ]] && return
 
-PS1='[\u@\h \W]\$ '
+
+# ------------------------------
+# Configuration
+
+# Load global configs first, so they don't overwrite our config
+[[ -f "${global_config_path}" ]] && . "${global_config_path}"
+
+# Customize prompt (https://www.gnu.org/software/bash/manual/bash.html#Controlling-the-Prompt)
+# Blue:   \[\033[01;34m\]
+# Yellow: \[\033[01;33m\]
+# Green:  \[\033[01;32m\]
+# Reset:  \[\033[00m\]
+
+# Without color
+# PS1='\A [\u@\h \W]\$ '
+
+PS1='\[\033[01;33m\]\A\[\033[00m\] [\[\033[01;34m\]\u@\h \[\033[01;32m\]\W\[\033[00m\]]\$ '
+
+# append to the history file, don't overwrite it
+shopt -s histappend
 
 if [ -f /etc/bashrc ]; then
     . /etc/bashrc
 fi
 
-# function definitions
-if [ -f ~/.bash_functions ]; then
-    . ~/.bash_functions
-    echo "===> Loaded bash functions"
-fi
-
-# alias definitions
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-    echo "===> Loaded bash aliases"
-fi
-
-# Load environment last so that functions and aliases may be used
-if [[ -f ~/.bash_environment ]]; then
-    . ~/.bash_environment
-    echo "===> Loaded bash environment"
-fi
-
-# ------------------------------
-# From an ubuntu bashrc; looked cool
-
-# append to the history file, don't overwrite it
-shopt -s histappend
-
-# make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-fi
+# Load external scripts
+[[ -f "${user_function_path}" ]] && . "${user_function_path}"
+[[ -f "${user_aliases_path}"  ]] && . "${user_aliases_path}"
+[[ -f "${user_environ_path}"  ]] && . "${user_environ_path}"

@@ -22,9 +22,7 @@ user_environ_path="${HOME}/.bash_environment"
 # Configuration
 
 # Load global configs first, so they don't overwrite our config
-if [[ -f "${global_config_path}" ]]; then
-    . "${global_config_path}"
-fi
+[[ -f "${global_config_path}" ]] && . "${global_config_path}"
 
 # Customize prompt (https://www.gnu.org/software/bash/manual/bash.html#Controlling-the-Prompt)
 # Blue:   \[\033[01;34m\]
