@@ -1,0 +1,3 @@
+R_HOME_USER = ${HOME}/.renv/main/home
+R_LIBS_USER = ${HOME}/.renv/main/libs/4.0
+R_HISTFILE  = ${HOME}/.renv/main/.Rhistory
