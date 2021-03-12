@@ -8,6 +8,7 @@ config_root="${1:?"Please provide the top-level config directory"}"
 bash_configs="${config_root}/mac/bash"
 fish_configdir="${config_root}/mac/fish"
 alacritty_configdir="${config_root}/mac/alacritty"
+tmux_configdir="${config_root}/mac/tmux"
 
 config_dirpath="${HOME}/.config"
 symlink_fishconfig="${config_dirpath}/fish"
@@ -49,4 +50,18 @@ if [[ ! -d "${symlink_alacrittyconfig}" ]]; then
 
 else
     echo "alacritty config exists. Skipping..."
+fi
+
+# tmux theme setup
+if [[ ! -d "${tmux_configdir}/themes" ]]; then
+    mkdir -p "${tmux_configdir}/themes"
+    path_to_nordtheme="${config_root}/external/nord-tmux"
+
+    if [[ -e "${path_to_nordtheme}/nord.tmux" ]]; then
+        ln -s "${path_to_nordtheme}" "${tmux_configdir}/themes/nord-tmux"
+
+    else
+        echo "tmux theme not found. make sure the submodule is setup."
+
+    fi
 fi

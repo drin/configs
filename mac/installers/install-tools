@@ -6,10 +6,20 @@
 
 homebrew_uri="https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh"
 
+# >> git submodules
+path_to_nord_tmux="external/nord-tmux"
+
 
 # ------------------------------
 # Installations
 
 /bin/bash -c "$(curl -fsSL "${homebrew_uri}")"
 
+if [[ -d "${path_to_nord_tmux}" ]]; then
+    git submodule init   "${path_to_nord_tmux}"
+    git submodule update "${path_to_nord_tmux}"
 
+else
+    echo "Dir does not exist: '${path_to_nord_tmux}'"
+    echo "double check the current directory or check it out manually"
+fi
