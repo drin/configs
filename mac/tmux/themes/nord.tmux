@@ -1,1 +1,0 @@
-/Users/octalene/code/configs/external/nord-tmux/nord.tmux
