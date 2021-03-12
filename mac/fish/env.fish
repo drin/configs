@@ -2,22 +2,28 @@
 
 
 # ------------------------------
-# Global variables
+# User fish environment configuration
 
 
-# ------------------------------
-# User environment
+# ..............................
+# Non-idempotent configuration (execute once per environment)
+
 if test -z $__custom_fish_config_initialized
-    echo "=> Initializing Fish environment"
+    # so we only run this block once
     set -gx __custom_fish_config_initialized 1
+
+    # so we can set the path idempotently
+    set -gx default_path $fish_user_paths
 
     # Prompt content (calculate once for efficiency)
     if not set -q __fish_prompt_hostname
         command -v hostname >/dev/null
         if test $status -eq 0
             set -gx __fish_prompt_hostname (hostname)
+
         else
             set -gx __fish_prompt_hostname "octalene-container"
+
         end
     end
 
@@ -29,27 +35,34 @@ if test -z $__custom_fish_config_initialized
     if not set -q __fish_color_blue
         set -gx __fish_color_blue (set_color -o blue)
     end
-
-    # ------------------------------
-    # Common env variables
-    set -Ux GIT_EDITOR  vim
-    set -Ux EDITOR      vim
-    set -Ux PAGER       less
-
-    # ------------------------------
-    # Tool-based variables
-    set homebrew_path       "/opt/homebrew/bin/"
-    set toolbox_path        "$HOME/toolbox"
-    set cargo_path          "$HOME/.cargo/bin"
-
-    set -gx fish_user_paths $toolbox_path $homebrew_path $cargo_path $fish_user_paths
-
-    if not set -q TERMINAL
-        set -Ux TERMINAL alacritty
-    end
 end
 
-# If pyenv is installed, make sure it's been initialized
+
+# ..............................
+# Idempotent configuration (may be executed many times)
+
+# >> common env variables
+set -gx GIT_EDITOR  vim
+set -gx EDITOR      vim
+set -gx PAGER       less
+
+
+# >> path-related env variables
+
+# tool-based paths (how they orient themselves)
+set -gx POETRY_HOME       "$HOME/toolbox/poetry"
+set -gx PYENV_ROOT        "$HOME/toolbox/pyenv"
+set -gx npm_config_prefix "$HOME/.npm_modules"
+
+# tool-based convenience variables
+set homebrew_path       "/opt/homebrew/bin/"
+set toolbox_path        "$HOME/toolbox"
+set cargo_path          "$HOME/.cargo/bin"
+
+set -gx fish_user_paths $toolbox_path $homebrew_path $cargo_path $default_path
+
+
+# If pyenv is installed, initialize it last
 command -v pyenv >/dev/null
 if test $status -eq 0
     echo "Initializing pyenv..."
