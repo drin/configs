@@ -15,7 +15,8 @@ if test -z $__custom_fish_config_initialized
     # so we can set the path idempotently
     set -gx default_path $fish_user_paths
 
-    # Prompt content (calculate once for efficiency)
+    # >> Prompt variables (calculate once for efficiency)
+    # set hostname (assume container if `hostname` is not available)
     if not set -q __fish_prompt_hostname
         command -v hostname >/dev/null
         if test $status -eq 0
@@ -49,17 +50,22 @@ set -gx PAGER       less
 
 # >> path-related env variables
 
+# tool-based paths (how they orient themselves)
+set -gx POETRY_HOME       "$HOME/toolbox/poetry"
+set -gx PYENV_ROOT        "$HOME/toolbox/pyenv"
+set -gx npm_config_prefix "$HOME/.npm_modules"
+
 # tool-based convenience variables
 set toolbox_path "$HOME/toolbox/bin"
 set cargo_path   "$HOME/.cargo/bin"
 
-set -gx POETRY_HOME "$HOME/toolbox/poetry"
 set -gx fish_user_paths $toolbox_path $cargo_path $default_path
 
 
 # If pyenv is installed, initialize it last
 command -v pyenv >/dev/null
 if test $status -eq 0
+    echo "Initializing pyenv..."
     pyenv init - | source
 end
 
