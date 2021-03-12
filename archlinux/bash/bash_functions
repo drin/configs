@@ -1,0 +1,26 @@
+#!/usr/bin/bash
+
+
+# ------------------------------
+# Function definitions
+
+function connect_ssh_agent {
+   echo "Exporting variables for running ssh-agent"
+
+   export SSH_AGENT_PID=$(pgrep ssh-agent)
+   export SSH_AUTH_SOCK=$(find /tmp/ssh* -name 'agent.[[:digit:]]*' -type s)
+}
+
+function gentex {
+   base_filename=${1}
+
+   latex  ${base_filename}.tex
+   latex  ${base_filename}.tex
+   dvips  ${base_filename}.dvi
+   ps2pdf ${base_filename}.ps
+}
+
+
+# ------------------------------
+# Signal that this file was invoked
+echo "===> Loaded bash functions"

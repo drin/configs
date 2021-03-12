@@ -1,0 +1,58 @@
+#!/usr/bin/bash
+
+
+# ------------------------------
+# Global and command-line variables
+
+poetry_web_uri="https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py"
+pyenv_git_uri="https://github.com/pyenv/pyenv"
+
+toolbox_path="${HOME}/toolbox/bin"
+path_to_poetry="${HOME}/toolbox/poetry"
+path_to_pyenv="$HOME/toolbox/pyenv"
+
+
+# ------------------------------
+# Main logic
+
+# make sure the toolbox directory exists
+mkdir -p "${toolbox_path}"
+
+# >> Install (via download) Poetry (via get-poetry.py)
+if [[ -z $(type poetry 2> /dev/null) ]]; then
+    # grab the install script and exec with python3
+    curl -sSL "${poetry_web_uri}" | env POETRY_HOME="${path_to_poetry}" python3
+
+    # symlink any binaries
+    for path_to_poetry_util in $(find "${path_to_poetry}/bin" -type f); do
+	util_name=$(basename "${path_to_poetry_util}")
+        ln -s "${path_to_poetry_util}" "${toolbox_path}/${util_name}"
+    done
+
+    # source poetry's env configuration
+    if [[ -f "${path_to_poetry}/env" ]]; then
+        source "${path_to_poetry}/env"
+        poetry self update
+    fi
+fi
+
+
+# >> Install Pyenv
+if [[ -z $(type pyenv 2> /dev/null) ]]; then
+    # checkout the repo and it's usable out of the box
+    git clone "${pyenv_git_uri}" "$path_to_pyenv"
+
+    # symlink any binaries
+    for path_to_pyenv_util in $(find "${path_to_pyenv}/bin" -type f); do
+	util_name=$(basename "${path_to_pyenv_util}")
+        ln -s "${path_to_pyenv_util}" "${toolbox_path}/${util_name}"
+    done
+    
+    # export these variables now for convenience
+    export PYENV_ROOT="$path_to_pyenv"
+    
+    # source pyenv's env configuration
+    if [[ -n $(command -v pyenv) ]]; then
+        eval "$(pyenv init -)"
+    fi
+fi

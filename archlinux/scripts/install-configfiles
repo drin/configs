@@ -1,0 +1,71 @@
+#!/bin/bash
+
+
+# ------------------------------
+# Global and command-line Variables
+
+config_root="${1:?"Please provide path to the configurations directory"}"
+
+# source paths of configuration files
+path_to_configs_bash="${config_root}/archlinux/bash"
+path_to_configs_fish="${config_root}/archlinux/fish"
+path_to_configs_alacritty="${config_root}/archlinux/alacritty"
+path_to_configs_terminfo="${config_root}/common/terminfo"
+path_to_configs_vim="${config_root}/common/vim/vimrc"
+
+# destination paths of configuration files
+path_to_home_config="${HOME}/.config"
+path_to_home_fish="${path_to_home_config}/fish"
+path_to_home_alacritty="${path_to_home_config}/alacritty"
+
+path_to_home_terminfo="${HOME}/.terminfo"
+path_to_home_vim="${HOME}/.vimrc"
+
+
+# ------------------------------
+# Validation
+
+if [[ ! -f "/etc/os-release" || -z $(grep "Arch Linux" "/etc/os-release") ]]; then
+    echo "Please double check your system:"
+    echo -e "\tExpected '/etc/os-release' to mention 'Arch Linux'"
+    exit 1
+fi
+
+
+# ------------------------------
+# Main logic
+
+# ..............................
+# All of the configurations that go directly into $HOME
+
+# [vim] symlink the file
+ln -s "${path_to_configs_vim}"      "${path_to_home_vim}"
+
+# [terminfo] symlink the directory
+ln -s "${path_to_configs_terminfo}" "${path_to_home_terminfo}"
+
+# [bash] symlink each file
+echo "[bash] Linking configuration files..."
+for bash_config_file in $(ls "${path_to_configs_bash}"); do
+    [[ -f "${HOME}/.${bash_config_file}" ]] && continue
+
+    echo -e "\t>> '${HOME}/.${bash_config_file}'"
+    ln -s "${path_to_configs_bash}/${bash_config_file}" "${HOME}/.${bash_config_file}"
+done
+
+
+# ..............................
+# All of the configurations that go into $HOME/.config
+mkdir -p ${path_to_home_config}
+
+# [fish] symlink the directory
+echo "[fish] Linking configuration directory..."
+if [[ -d ${path_to_home_config} && ! -e ${path_to_home_fish} ]]; then
+   ln -s "${path_to_configs_fish}" "${path_to_home_fish}"
+fi
+
+# [alacritty] install repository and package
+echo -e "[alacritty] Linking configuration directory..."
+if [[ -d ${path_to_home_config} && ! -e ${path_to_home_alacritty} ]]; then
+    ln -s "${path_to_configs_alacritty}" "${path_to_home_alacritty}"
+fi

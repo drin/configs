@@ -1,0 +1,30 @@
+# ------------------------------
+# Common endpoints
+
+host *
+    ForwardAgent yes
+    ServerAliveInterval 10
+
+host cloud
+    hostname cloud.aldrinmontana.com
+    user     octalene
+
+host gi
+    hostname courtyard.gi.ucsc.edu
+    user     akmontan
+
+host gateway
+    hostname gateway.soe.ucsc.edu
+    user     drin
+
+
+# ------------------------------
+# Cloudlab aliases for convenience
+
+host pgbench-medium
+    hostname 128.105.146.20
+    user     akmontan
+
+host pgbench-small
+    hostname 128.105.145.143
+    user     akmontan

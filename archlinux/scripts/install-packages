@@ -1,0 +1,25 @@
+#!/bin/bash
+
+
+# ------------------------------
+# Global and command-line Variables
+
+
+# ------------------------------
+# Validation
+
+if [[ ! -f "/etc/os-release" || -z $(grep "Arch Linux" "/etc/os-release") ]]; then
+    echo "Please double check your system:"
+    echo -e "\tExpected '/etc/os-release' to mention 'Arch Linux'"
+    exit 1
+fi
+
+
+# ------------------------------
+# Main logic
+
+echo "[Packages] installing packages"
+sudo pacman -Sy --noconfirm fish                  \
+                            libffi                \
+                            bzip2                 \
+                            readline

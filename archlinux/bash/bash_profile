@@ -1,0 +1,21 @@
+#!/bin/bash
+
+
+# ------------------------------
+# Global variables
+
+global_profile_path="/etc/profile"
+user_profile_path="${HOME}/.bashrc"
+
+
+# ------------------------------
+# Source existing config files
+
+[[ -f "${global_profile_path}" ]] && source "${global_profile_path}"
+[[ -f "${user_profile_path}"   ]] && .      "${user_profile_path}"
+
+
+# set file creation mask because, why not
+umask u=rwx,g=r,o=r
+
+export PATH="$HOME/toolbox/poetry/bin:$PATH"

@@ -1,0 +1,43 @@
+#!/bin/bash
+
+
+# ------------------------------
+# Global and command-line Variables
+
+# package repositories
+ppa_fish="ppa:fish-shell/release-3"
+ppa_alacritty="ppa:mmstick76/alacritty"
+
+
+# ------------------------------
+# Validation
+
+if [[ ! -f "/etc/os-release" || -z $(grep "Ubuntu" "/etc/os-release") ]]; then
+    echo "Please double check your system:"
+    echo -e "\tExpected '/etc/os-release' to mention 'Ubuntu'"
+    exit 1
+fi
+
+
+# ------------------------------
+# Main logic
+
+echo "[Packages] updating packages"
+sudo apt-get -y update
+
+echo "[Packages] adding apt repositories"
+sudo apt-add-repository -y "${ppa_fish}"
+sudo apt-add-repository -y "${ppa_alacritty}"
+
+echo "[Packages] installing packages"
+sudo apt-get -y install fish                  \
+                        alacritty             \
+
+                        # for research
+                        postgresql libpq-dev  \
+                        zfsutils-linux        \
+
+                        # python3 optional dependencies
+                        libffi-dev            \
+                        libbz2-dev            \
+                        libreadline-dev
