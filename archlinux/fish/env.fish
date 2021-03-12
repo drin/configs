@@ -17,7 +17,7 @@ if test -z $__custom_fish_config_initialized
 
     # Prompt content (calculate once for efficiency)
     if not set -q __fish_prompt_hostname
-        command -v hostname
+        command -v hostname >/dev/null
         if test $status -eq 0
             set -gx __fish_prompt_hostname (hostname)
 
@@ -53,11 +53,12 @@ set -gx PAGER       less
 set toolbox_path "$HOME/toolbox/bin"
 set cargo_path   "$HOME/.cargo/bin"
 
+set -gx POETRY_HOME "$HOME/toolbox/poetry"
 set -gx fish_user_paths $toolbox_path $cargo_path $default_path
 
 
 # If pyenv is installed, initialize it last
-which -s pyenv
+command -v pyenv >/dev/null
 if test $status -eq 0
     pyenv init - | source
 end
