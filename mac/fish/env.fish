@@ -13,7 +13,8 @@ if test -z $__custom_fish_config_initialized
 
     # Prompt content (calculate once for efficiency)
     if not set -q __fish_prompt_hostname
-        if test -n (type hostname)
+        command -v hostname >/dev/null
+        if test $status -eq 0
             set -gx __fish_prompt_hostname (hostname)
         else
             set -gx __fish_prompt_hostname "octalene-container"
@@ -46,13 +47,13 @@ if test -z $__custom_fish_config_initialized
     if not set -q TERMINAL
         set -Ux TERMINAL alacritty
     end
+end
 
-    # If pyenv is installed, make sure it's been initialized
-    which -s pyenv
-    if test $status -eq 0
-        echo "Initializing pyenv..."
-        pyenv init - | source
-    end
+# If pyenv is installed, make sure it's been initialized
+command -v pyenv >/dev/null
+if test $status -eq 0
+    echo "Initializing pyenv..."
+    pyenv init - | source
 end
 
 
