@@ -47,15 +47,8 @@ set -gx EDITOR      vim
 set -gx PAGER       less
 
 
-# >> path-related env variables
-
-# tool-based paths (how they orient themselves)
-set -gx POETRY_HOME       "$HOME/toolbox/poetry"
-set -gx PYENV_ROOT        "$HOME/toolbox/pyenv"
-set -gx npm_config_prefix "$HOME/.npm_modules"
-
 # tool-based convenience variables
-set homebrew_path       "/opt/homebrew/bin/"
+set homebrew_path       "/opt/homebrew/bin"
 set toolbox_path        "$HOME/toolbox"
 set cargo_path          "$HOME/.cargo/bin"
 
