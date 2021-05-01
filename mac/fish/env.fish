@@ -19,7 +19,7 @@ if test -z $__custom_fish_config_initialized
     if not set -q __fish_prompt_hostname
         command -v hostname >/dev/null
         if test $status -eq 0
-            set -gx __fish_prompt_hostname (hostname)
+            set -gx __fish_prompt_hostname (hostname -s)
 
         else
             set -gx __fish_prompt_hostname "octalene-container"
@@ -45,14 +45,24 @@ end
 set -gx GIT_EDITOR  vim
 set -gx EDITOR      vim
 set -gx PAGER       less
+set -gx LANG        "en_US.UTF-8"
 
 
 # tool-based convenience variables
-set homebrew_path       "/opt/homebrew/bin"
-set toolbox_path        "$HOME/toolbox"
-set cargo_path          "$HOME/.cargo/bin"
+set homebrew_path      "/opt/homebrew/bin"
+set homebrew_tool_path "/opt/homebrew/opt"
 
-set -gx fish_user_paths $toolbox_path $homebrew_path $cargo_path $default_path
+set toolbox_path       "$HOME/toolbox"
+set cargo_path         "$HOME/.cargo/bin"
+
+set jdk_path           "$homebrew_tool_path/openjdk/bin"
+
+
+set -gx fish_user_paths $toolbox_path  \
+                        $homebrew_path \
+                        $cargo_path    \
+                        $jdk_path      \
+                        $default_path
 
 
 # If pyenv is installed, initialize it last

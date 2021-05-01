@@ -33,7 +33,8 @@ fi
 # ..............................
 # Idempotent configuration (may be executed many times)
 
-homebrew_path="/opt/homebrew/bin/"
+homebrew_path="/opt/homebrew/bin"
+homebrew_tool_path="/opt/homebrew/opt"
 
 # Reconstruct PATH using the vanilla PATH
 export PATH=${homebrew_path}:${default_path}
@@ -41,7 +42,18 @@ export GIT_EDITOR=vim
 export EDITOR=vim
 export PAGER=less
 
+export NVM_DIR="$HOME/.nvm"
+
 [[ -f "${HOME}/.cargo/env" ]] && source "${HOME}/.cargo/env"
+
+nvm_basedir="${homebrew_tool_path}/nvm"
+if [[ -d "${nvm_basedir}" ]]; then
+    # Load nvm
+    . "${nvm_basedir}/nvm.sh"
+
+    # Load bash_completion for nvm
+    . "${nvm_basedir}/etc/bash_completion.d/nvm"
+fi
 
 # Signal that this file was invoked
 echo "===> Loaded bash environment"
