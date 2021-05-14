@@ -30,14 +30,11 @@ sudo apt-add-repository -y "${ppa_fish}"
 sudo apt-add-repository -y "${ppa_alacritty}"
 
 echo "[Packages] installing packages"
-sudo apt-get -y install fish                  \
-                        alacritty             \
+# for dev environment
+sudo apt-get -y install fish alacritty
 
-                        # for research
-                        postgresql libpq-dev  \
-                        zfsutils-linux        \
+# for research
+sudo apt-get -y install postgresql libpq-dev zfsutils-linux
 
-                        # python3 optional dependencies
-                        libffi-dev            \
-                        libbz2-dev            \
-                        libreadline-dev
+# python3 optional deps
+sudo apt-get -y install libffi-dev libbz2-dev libreadline-dev
