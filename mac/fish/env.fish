@@ -69,7 +69,7 @@ set -gx fish_user_paths $toolbox_path  \
 command -v pyenv >/dev/null
 if test $status -eq 0
     echo "Initializing pyenv..."
-    pyenv init - | source
+    pyenv init --path | source
 end
 
 
