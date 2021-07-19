@@ -1,4 +1,4 @@
-#!/opt/homebrew/bin/fish
+#!/usr/bin/env fish
 
 
 # ------------------------------
@@ -9,13 +9,34 @@
 # Non-idempotent configuration (execute once per environment)
 
 if test -z $__custom_fish_config_initialized
+    echo "-- Initializing fish environment"
+
     # so we only run this block once
     set -gx __custom_fish_config_initialized 1
 
-    # so we can set the path idempotently
-    set -gx default_path $fish_user_paths
 
-    # Prompt content (calculate once for efficiency)
+    # >> so we can set the path idempotently
+    # >> Add paths in reverse order (`fish_add_path` prepends by default)
+    fish_add_path "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
+    fish_add_path "/Library/Apple/usr/bin"
+    fish_add_path "/usr/local/bin" "/usr/bin" "/bin" "/usr/sbin" "/sbin"
+    fish_add_path "/Applications/Keybase.app/Contents/SharedSupport/bin"
+
+    fish_add_path "$HOME/.cargo/bin"
+    fish_add_path "$HOME/toolbox/bin"
+
+
+    # >> If pyenv is installed, initialize it last
+    command -v pyenv >/dev/null
+    if test $status -eq 0
+        echo "Initializing pyenv..."
+
+        # pyenv init --path modifies PATH, but we just want the path
+        fish_add_path (pyenv init --path | sed 's/.*\'\(.*\)\'.*/\1/')
+    end
+
+
+    # >> Prompt content (calculate once for efficiency)
     if not set -q __fish_prompt_hostname
         command -v hostname >/dev/null
         if test $status -eq 0
@@ -48,28 +69,13 @@ set -gx PAGER       less
 set -gx LANG        "en_US.UTF-8"
 
 
-# tool-based convenience variables
-set homebrew_path      "/opt/homebrew/bin"
-set homebrew_tool_path "/opt/homebrew/opt"
+# >> add different homebrew path based on architecture
+if test (uname -m) = "x86_64"
+    fish_add_path "/usr/local/Homebrew/bin"
 
-set toolbox_path       "$HOME/toolbox"
-set cargo_path         "$HOME/.cargo/bin"
+else
+    fish_add_path "/opt/homebrew/bin"
 
-set jdk_path           "$homebrew_tool_path/openjdk/bin"
-
-
-set -gx fish_user_paths $toolbox_path  \
-                        $homebrew_path \
-                        $cargo_path    \
-                        $jdk_path      \
-                        $default_path
-
-
-# If pyenv is installed, initialize it last
-command -v pyenv >/dev/null
-if test $status -eq 0
-    echo "Initializing pyenv..."
-    pyenv init --path | source
 end
 
 
