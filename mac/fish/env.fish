@@ -79,5 +79,10 @@ else
 end
 
 
+# ------------------------------
 # Signal that this file has been invoked
-echo "-- Fish environment initialized"
+
+# Only print if running interactively
+if status -i
+    echo "-- Fish environment initialized"
+end

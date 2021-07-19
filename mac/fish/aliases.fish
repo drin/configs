@@ -7,3 +7,12 @@ alias vpn-ucsc    'sudo openconnect --verbose 128.114.102.44:443'
 # because fish is installed by brew, and thus architecture dependent
 alias amdfish     'arch -x86_64 /usr/local/bin/fish'
 alias armfish     'arch -arm64  /opt/homebrew/bin/fish'
+
+
+# ------------------------------
+# Signal that this file has been invoked
+
+# Only print if running interactively
+if status -i
+    echo "-- Fish aliases initialized"
+end
