@@ -10,8 +10,19 @@
 if [[ ${BASH_ENV_LOADED} -eq 0 ]]; then
     export BASH_ENV_LOADED=$(( 1 ))
 
-    # bank the vanilla path for convenience
-    export default_path="${PATH}"
+    # >> bank the vanilla path for convenience (now hard coded for reliability)
+
+    # NOTE: this is fallback if things get weird
+    # export default_path="${PATH}"
+
+    # These are based on what looks reasonable in my existing path
+    unix_paths="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+
+    keybase_path="/Applications/Keybase.app/Contents/SharedSupport/bin"
+    apple_path="/Library/Apple/usr/bin"
+    mono_path="/Library/Frameworks/Mono.framework/Versions/Current/Commands"
+
+    export default_path="${unix_paths}:${keybase_path}:${apple_path}:${mono_path}"
 
     # If we don't have terminfo built, use xterm
     if [[ $(find "${HOME}/.terminfo" -name '*alacritty*' | wc -l) -eq 2 ]]; then
@@ -33,19 +44,31 @@ fi
 # ..............................
 # Idempotent configuration (may be executed many times)
 
-homebrew_path="/opt/homebrew/bin"
-homebrew_tool_path="/opt/homebrew/opt"
-
-# Reconstruct PATH using the vanilla PATH
-export PATH=${homebrew_path}:${default_path}
 export GIT_EDITOR=vim
 export EDITOR=vim
 export PAGER=less
 
-export NVM_DIR="$HOME/.nvm"
+
+if [[ $(uname -m) = "x86_64" ]]; then
+    homebrew_path="/usr/local/Homebrew/bin"
+    homebrew_tool_path="/usr/local/opt"
+
+    # Reconstruct PATH using the vanilla PATH
+    export PATH=${homebrew_path}:${default_path}
+
+else
+    homebrew_path="/opt/homebrew/bin"
+    homebrew_tool_path="/opt/homebrew/opt"
+
+    # Reconstruct PATH using the vanilla PATH
+    export PATH=${homebrew_path}:${default_path}
+
+fi
+
 
 [[ -f "${HOME}/.cargo/env" ]] && source "${HOME}/.cargo/env"
 
+export NVM_DIR="$HOME/.nvm"
 nvm_basedir="${homebrew_tool_path}/nvm"
 if [[ -d "${nvm_basedir}" ]]; then
     # Load nvm
