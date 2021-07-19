@@ -2,9 +2,13 @@
 
 alias vim         'vim -O'
 alias external-ip 'dig @resolver1.opendns.com ANY myip.opendns.com +short'
-alias vpn-ucsc    'sudo openconnect --verbose 128.114.102.44:443'
+alias vpn-ucsc    'sudo openconnect --verbose vpn.ucsc.edu'
 
 
 # ------------------------------
 # Signal that this file has been invoked
-echo "-- Fish aliases initialized"
+
+# Only print if running interactively
+if status -i
+    echo "-- Fish aliases initialized"
+end
