@@ -1,0 +1,14 @@
+startup_message off
+
+shell fish
+
+defscrollback 5000
+escape ^@a
+
+altscreen on
+
+term screen-256color
+
+termcapinfo alacritty ti@:te@
+
+#bindkey "^[SHIFT+PGUP" stuff ^b
