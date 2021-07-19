@@ -1,4 +1,4 @@
-#!/opt/homebrew/bin/fish
+#!/usr/bin/env fish
 
 
 # ------------------------------
@@ -12,11 +12,9 @@ set fish_configs   "env.fish" "aliases.fish"
 if test -d "$fish_configdir"
 
     for fish_file in $fish_configs
-
-       if test -e "$fish_configdir/$fish_file"
-          source "$fish_configdir/$fish_file"
-       end
-
+        if test -e "$fish_configdir/$fish_file"
+            source "$fish_configdir/$fish_file"
+        end
     end
 
 end

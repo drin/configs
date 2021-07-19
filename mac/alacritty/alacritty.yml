@@ -299,6 +299,7 @@ mouse:
   # If this is `true`, the cursor is temporarily hidden when typing.
   hide_when_typing: false
 
+hints:
   url:
     # URL launcher
     #
@@ -353,8 +354,12 @@ live_config_reload: true
 #   - (Linux) user login shell
 #   - (Windows) powershell
 shell:
-  program: /opt/homebrew/bin/fish
-#  args:
+  program: /usr/bin/env
+  args:
+    - "SHELL=/opt/homebrew/bin/fish"
+    - "arch"
+    - "-arm64"
+    - "/opt/homebrew/bin/fish"
 #    - --login
 
 # Startup directory
