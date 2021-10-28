@@ -28,6 +28,10 @@ if [[ $BASH_ENV_LOADED -eq 0 ]]; then
     if [ $? -eq 0 ]; then
         eval "$(pyenv init -)"
     fi
+
+    # if nvm is available, initialize it for this environment
+    initnvm_path="/usr/share/nvm/init-nvm.sh"
+    [[ -f "${initnvm_path}" ]] && source "${initnvm_path}"
 fi
 
 
