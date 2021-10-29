@@ -11,6 +11,7 @@ path_to_configs_bash="${config_root}/ubuntu/bash"
 path_to_configs_fish="${config_root}/ubuntu/fish"
 path_to_configs_alacritty="${config_root}/ubuntu/alacritty"
 path_to_configs_terminfo="${config_root}/common/terminfo"
+path_to_configs_vim="${config_root}/common/vim/vimrc"
 
 # destination paths of configuration files
 path_to_home_config="${HOME}/.config"
@@ -18,6 +19,7 @@ path_to_home_fish="${path_to_home_config}/fish"
 path_to_home_alacritty="${path_to_home_config}/alacritty"
 
 path_to_home_terminfo="${HOME}/.terminfo"
+path_to_home_vim="${HOME}/.vimrc"
 
 
 # ------------------------------
@@ -36,7 +38,12 @@ fi
 # ..............................
 # All of the configurations that go directly into $HOME
 
+# [vim] symlink the file
+echo "[vim] Linking configuration files..."
+ln -s "${path_to_configs_vim}"      "${path_to_home_vim}"
+
 # [terminfo] symlink the directory
+echo "[terminfo] Linking configuration files..."
 ln -s "${path_to_configs_terminfo}" "${path_to_home_terminfo}"
 
 # [bash] symlink each file
