@@ -51,8 +51,6 @@ set -gx PAGER       less
 # >> path-related env variables
 
 # tool-based paths (how they orient themselves)
-set -gx POETRY_HOME       "$HOME/toolbox/poetry"
-set -gx PYENV_ROOT        "$HOME/toolbox/pyenv"
 set -gx npm_config_prefix "$HOME/.npm_modules"
 
 # tool-based convenience variables
@@ -62,15 +60,9 @@ set snap_path    "/var/lib/snapd/snap/bin"
 
 set -gx fish_user_paths $toolbox_path $cargo_path $snap_path $default_path
 
-
-# If pyenv is installed, initialize it last
-command -v pyenv >/dev/null
-if test $status -eq 0
-    # Only print if running interactively
-    if status -i
-        echo "Initializing pyenv..."
-    end
-    pyenv init - | source
+which -- pyenv >/dev/null 2>&1
+if test "$status" -eq 0
+    pyenv init --path | source
 end
 
 
