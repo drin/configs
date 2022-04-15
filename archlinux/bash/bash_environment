@@ -27,6 +27,7 @@ if [[ $BASH_ENV_LOADED -eq 0 ]]; then
     type pyenv > /dev/null 2>&1
     if [ $? -eq 0 ]; then
         eval "$(pyenv init -)"
+        eval "$(pyenv init --path)"
     fi
 
     # if nvm is available, initialize it for this environment
@@ -45,7 +46,7 @@ export PAGER=less
 
 # >> path-related env variables
 
-# this is where all installed tools should be based
+# this serves as a "registry" of installed tools
 toolbox_path="${HOME}/toolbox"
 
 # reconstruct PATH using the vanilla PATH
