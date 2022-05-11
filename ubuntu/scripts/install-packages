@@ -12,9 +12,9 @@ ppa_alacritty="ppa:mmstick76/alacritty"
 # ------------------------------
 # Validation
 
-if [[ ! -f "/etc/os-release" || -z $(grep "Ubuntu" "/etc/os-release") ]]; then
+if [[ ! -f "/etc/os-release" ]] || [[ -z $(grep "Ubuntu" "/etc/os-release") && -z $(grep "Debian" "/etc/os-release") ]]; then
     echo "Please double check your system:"
-    echo -e "\tExpected '/etc/os-release' to mention 'Ubuntu'"
+    echo -e "\tExpected '/etc/os-release' to mention 'Ubuntu' or 'Debian'"
     exit 1
 fi
 
