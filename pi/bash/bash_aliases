@@ -1,0 +1,15 @@
+#!/usr/bin/bash
+
+
+# ------------------------------
+# User aliases
+
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias rm='rm -i'
+alias vim='vim -O'
+
+
+# ------------------------------
+# Signal that this file has been invoked
+echo "===> Loaded bash aliases"

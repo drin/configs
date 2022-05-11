@@ -1,0 +1,15 @@
+#!/bin/bash
+
+
+# ------------------------------
+# Main logic
+
+# packages to install
+sudo apt-get -y install cmake            \
+                        gcc              \
+                        g++              \
+                        libboost-all-dev \
+                        libssl-dev       \
+                        grpc++           \
+                        llvm-11
+
