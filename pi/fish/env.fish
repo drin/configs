@@ -49,9 +49,7 @@ set -gx PAGER      less
 
 
 # >> path-related env variables
-
-# tool-based convenience variables
-set cargo_path    "$HOME/.cargo/bin"
+set cargo_path "$HOME/.cargo/bin"
 
 set -gx fish_user_paths $cargo_path $default_path
 
