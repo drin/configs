@@ -21,10 +21,6 @@ window:
     columns: 0
     lines: 0
 
-  # Window opacity as a floating point number from `0.0` to `1.0`.
-  # The value `0.0` is completely transparent and `1.0` is opaque.
-  opacity: 0.9
-
   # Window position (changes require restart)
   #
   # Specified in number of pixels.
@@ -101,7 +97,7 @@ font:
     #   - (macOS) Menlo
     #   - (Linux) monospace
     #   - (Windows) Consolas
-    family: "Iosevka Medium"
+    family: "Iosevka medium"
 
     # The `style` can be specified to pick a specific face.
     style: Regular
@@ -158,7 +154,7 @@ font:
   #
   # This is a global setting and will require a log out or restart to take
   # effect.
-  use_thin_strokes: false
+  use_thin_strokes: true
 
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
@@ -267,6 +263,12 @@ bell:
   duration: 0
   color: '0xffffff'
 
+# Background opacity
+#
+# Window opacity as a floating point number from `0.0` to `1.0`.
+# The value `0.0` is completely transparent and `1.0` is opaque.
+background_opacity: 0.9
+
 # Mouse bindings
 #
 # Available fields:
@@ -297,7 +299,7 @@ mouse:
   # If this is `true`, the cursor is temporarily hidden when typing.
   hide_when_typing: false
 
-  hints:
+  url:
     # URL launcher
     #
     # This program is executed when clicking on a text which is recognized as a URL.

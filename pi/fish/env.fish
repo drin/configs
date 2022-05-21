@@ -43,33 +43,25 @@ end
 # Idempotent configuration (may be executed many times)
 
 # >> common env variables
-set -gx GIT_EDITOR  vim
-set -gx EDITOR      vim
-set -gx PAGER       less
+set -gx GIT_EDITOR vim
+set -gx EDITOR     vim
+set -gx PAGER      less
 
 
 # >> path-related env variables
+set cargo_path "$HOME/.cargo/bin"
 
-# tool-based paths (how they orient themselves)
-set -gx npm_config_prefix "$HOME/.npm_modules"
+set -gx fish_user_paths $cargo_path $default_path
 
-# tool-based convenience variables
-set toolbox_path "$HOME/toolbox/bin"
-set cargo_path   "$HOME/.cargo/bin"
-set snap_path    "/var/lib/snapd/snap/bin"
 
-set -gx fish_user_paths $toolbox_path $cargo_path $snap_path $default_path
-
-which -- pyenv >/dev/null 2>&1
-if test "$status" -eq 0
+# If pyenv is installed, initialize it last
+command -v pyenv >/dev/null
+if test $status -eq 0
+    echo "Initializing pyenv..."
     pyenv init --path | source
 end
 
 
 # ------------------------------
 # Signal that this file has been invoked
-
-# Only print if running interactively
-if status -i
-    echo "-- Fish environment initialized"
-end
+echo "-- Fish environment initialized"

@@ -7,9 +7,9 @@
 config_root="${1:?"Please provide path to the configurations directory"}"
 
 # source paths of configuration files
-path_to_configs_bash="${config_root}/ubuntu/bash"
-path_to_configs_fish="${config_root}/ubuntu/fish"
-path_to_configs_alacritty="${config_root}/ubuntu/alacritty"
+path_to_configs_bash="${config_root}/pi/bash"
+path_to_configs_fish="${config_root}/pi/fish"
+path_to_configs_alacritty="${config_root}/pi/alacritty"
 path_to_configs_terminfo="${config_root}/common/terminfo"
 path_to_configs_vim="${config_root}/common/vim/vimrc"
 

@@ -1,0 +1,15 @@
+# .bash_profile
+
+# Source global profile settings
+if [ -f /etc/profile ]; then
+    source /etc/profile
+fi
+
+# Include user-specific aliases and functions
+if [ -f ~/.bashrc ]; then
+    . ~/.bashrc
+fi
+
+# adjust file/dir creation mask (group & other can read/exec)
+umask u=rwx,g=r,o=r
+. "$HOME/.cargo/env"

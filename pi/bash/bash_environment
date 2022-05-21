@@ -4,7 +4,6 @@
 # ------------------------------
 # User bash environment configuration
 
-
 # ..............................
 # Non-idempotent configuration (execute once per environment)
 
@@ -12,7 +11,7 @@ if [[ $BASH_ENV_LOADED -eq 0 ]]; then
     export BASH_ENV_LOADED=$(( 1 ))
 
     # bank the vanilla path for convenience
-    export default_path="${PATH}"
+    export default_path="${PATH}:/usr/local/bin:${HOME}/.local/bin:${HOME}/bin"
 
     # If we don't have terminfo built, use xterm
     if [[ $(find "${HOME}/.terminfo" -name '*alacritty*' | wc -l) -eq 2 ]]; then
@@ -29,12 +28,7 @@ if [[ $BASH_ENV_LOADED -eq 0 ]]; then
         eval "$(pyenv init -)"
         eval "$(pyenv init --path)"
     fi
-
-    # if nvm is available, initialize it for this environment
-    initnvm_path="/usr/share/nvm/init-nvm.sh"
-    [[ -f "${initnvm_path}" ]] && source "${initnvm_path}"
 fi
-
 
 # ..............................
 # Idempotent configuration (may be executed many times)
@@ -46,17 +40,8 @@ export PAGER=less
 
 # >> path-related env variables
 
-# this serves as a "registry" of installed tools
-toolbox_path="${HOME}/toolbox"
-
 # reconstruct PATH using the vanilla PATH
-export PATH="${toolbox_path}/bin":${default_path}
-
-# for pyenv and poetry to orient themselves
-export PYENV_ROOT="${toolbox_path}/pyenv"
-export POETRY_HOME="${toolbox_path}/poetry"
-
-[[ -f "${HOME}/.cargo/env" ]] && source "${HOME}/.cargo/env"
+export PATH=${default_path}
 
 
 # ------------------------------

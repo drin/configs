@@ -1,30 +1,52 @@
-if [[ $BASH_ENV_LOADED != 1 ]]; then
-    echo "Loading BASH env"
+#!/usr/bin/bash
 
-    export BASH_ENV_LOADED=1
 
-    export EDITOR=vim
-    export TERMINAL=alacritty
+# ------------------------------
+# User bash environment configuration
 
-    export PATH=$PATH:/usr/local/bin:$HOME/.local/bin:$HOME/bin
+# ..............................
+# Non-idempotent configuration (execute once per environment)
 
-    # for when git is installed (necessary on centos machines)
-    # export PATH=$HOME/toolbox/git/bin:$PATH
+if [[ $BASH_ENV_LOADED -eq 0 ]]; then
+    export BASH_ENV_LOADED=$(( 1 ))
 
-    # for when skyhook is installed. Typically for cloudlab machines
-    # export PATH=/mnt/sdb/skyhookdm-ceph/build/bin:$PATH
+    # bank the vanilla path for convenience
+    export default_path="${PATH}:/usr/local/bin:${HOME}/.local/bin:${HOME}/bin"
 
-    # for when poetry is installed
-    export PATH=$HOME/.poetry/bin:$PATH
+    # If we don't have terminfo built, use xterm
+    if [[ $(find "${HOME}/.terminfo" -name '*alacritty*' | wc -l) -eq 2 ]]; then
+        export TERMINAL=alacritty
 
-    # for when pyenv is installed
-    export PYENV_ROOT=$HOME/toolbox/pyenv
-    export PATH=$PYENV_ROOT/bin:$PATH
-    export PATH=/usr/lib/postgresql/13/bin:$PATH
+    else
+        export TERMINAL=xterm-256color
 
+    fi
+
+    # if pyenv is available, initialize it for this environment
     type pyenv > /dev/null 2>&1
     if [ $? -eq 0 ]; then
+        eval "$(pyenv init -)"
         eval "$(pyenv init --path)"
     fi
-        
 fi
+
+# ..............................
+# Idempotent configuration (may be executed many times)
+
+# >> common env variables
+export EDITOR=vim
+export GIT_EDITOR=vim
+export PAGER=less
+
+# >> path-related env variables
+
+# this serves as a "registry" of installed tools
+toolbox_path="${HOME}/toolbox"
+
+# reconstruct PATH using the vanilla PATH
+export PATH="${toolbox_path}/bin":${default_path}
+
+
+# ------------------------------
+# Signal that this file was invoked
+echo "===> Loaded bash environment"

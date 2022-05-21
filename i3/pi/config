@@ -158,27 +158,7 @@ mode "resize" {
 # finds out, if available)
 bar {
       # Choose output for this bar to be displayed on
-      output HDMI-0
-
-      status_command i3status --config ~/.config/i3/i3status.conf
-
-      # hide bar by default, but show when pressing the mod key
-      mode hide
-      modifier $mod
-
-      # disable clicking on workspace buttons
-      bindsym button1 nop
-
-      # I prefer bars to be docked on top
-      position top
-
-      separator_symbol " "
-}
-
-bar {
-      # Choose output for this bar to be displayed on
-      output DP-1
-      tray_output primary
+      output HDMI-1
 
       status_command i3status --config ~/.config/i3/i3status.conf
 
