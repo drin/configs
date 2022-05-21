@@ -35,7 +35,6 @@ if test -z $__custom_fish_config_initialized
         fish_add_path (pyenv init --path | sed 's/.*\'\(.*\)\'.*/\1/')
     end
 
-
     # >> Prompt content (calculate once for efficiency)
     if not set -q __fish_prompt_hostname
         command -v hostname >/dev/null
@@ -67,6 +66,9 @@ set -gx GIT_EDITOR  vim
 set -gx EDITOR      vim
 set -gx PAGER       less
 set -gx LANG        "en_US.UTF-8"
+
+# for gpg-agent
+set -gx GPG_TTY     (tty)
 
 
 # >> add different homebrew path based on architecture

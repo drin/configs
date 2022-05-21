@@ -1,3 +1,4 @@
+.DS_Store
 common/vim/colors/
 common/vim/plugins/
 fish_variables
