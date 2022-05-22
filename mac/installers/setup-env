@@ -1,64 +1,75 @@
 #!/bin/bash
 
+
 # ------------------------------
 # Global and command-line args
 
 config_root="${1:?"Please provide the top-level config directory"}"
 
-bash_configs="${config_root}/mac/bash"
-fish_configdir="${config_root}/mac/fish"
-alacritty_configdir="${config_root}/mac/alacritty"
-tmux_configdir="${config_root}/mac/tmux"
+# source paths of configuration files
+path_to_configs_vim="${config_root}/common/vim/vimrc"
+path_to_configs_bash="${config_root}/mac/bash"
+path_to_configs_fish="${config_root}/mac/fish"
+path_to_configs_alacritty="${config_root}/mac/alacritty"
+path_to_configs_tmux="${config_root}/mac/tmux"
 
-config_dirpath="${HOME}/.config"
-symlink_fishconfig="${config_dirpath}/fish"
-symlink_alacrittyconfig="${config_dirpath}/alacritty"
+# destination paths of configuration files
+path_to_home_config="${HOME}/.config"
+path_to_home_fish="${path_to_home_config}/fish"
+path_to_home_alacritty="${path_to_home_config}/alacritty"
+
+path_to_home_vim="${HOME}/.vimrc"
 
 
 # ------------------------------
-# Configuration
+# Validation
 
-# Create the base ".config" directory
-mkdir -p ${config_dirpath}
+# >> At some point, add validation that we're on a mac
 
-# Bash setup
-for config_file in $(ls "${bash_configs}"); do
-    symlink_filepath="${HOME}/.${config_file}"
-    config_filepath="${bash_configs}/${config_file}"
 
-    if [[ ! -f "${HOME}/.${config_file}" ]]; then
-        ln -s "${config_filepath}" "${symlink_filepath}"
+# ------------------------------
+# Main logic
 
-    else
-        echo "Skipping existing file: '${symlink_filepath}'"
+# ..............................
+# All of the configurations that go directly into $HOME
 
-    fi
+# [vim] symlink the file
+echo "[vim] Linking configuration files..."
+ln -s "${path_to_configs_vim}" "${path_to_home_vim}"
+
+# [bash] symlink each file
+for bash_config_file in $(ls "${path_to_configs_bash}"); do
+    [[ -f "${HOME}/.${bash_config_file}" ]] && continue
+
+    config_filepath="${path_to_configs_bash}/${bash_config_file}"
+    symlink_filepath="${HOME}/.${bash_config_file}"
+
+    echo -e "\t>> '${symlink_filepath}'"
+    ln -s "${config_filepath}" "${symlink_filepath}"
 done
 
-# Fish setup
-if [[ ! -d "${symlink_fishconfig}" ]]; then
-   ln -s "${fish_configdir}" "${symlink_fishconfig}"
 
-else
-   echo "fish config exists. Skipping..."
+# ..............................
+# All of the configurations that go into $HOME/.config
+mkdir -p ${path_to_home_config}
 
+# [fish] symlink the directory
+if [[ -d "${path_to_home_config}" && ! -d "${path_to_home_fish}" ]]; then
+   ln -s "${path_to_configs_fish}" "${path_to_home_fish}"
 fi
 
-# Alacritty setup
-if [[ ! -d "${symlink_alacrittyconfig}" ]]; then
-    ln -s "${alacritty_configdir}" "${symlink_alacrittyconfig}"
-
-else
-    echo "alacritty config exists. Skipping..."
+# [alacritty] symlink the directory
+if [[ ! -d "${path_to_home_alacritty}" ]]; then
+    ln -s "${path_to_configs_alacritty}" "${path_to_home_alacritty}"
 fi
 
 # tmux theme setup
-if [[ ! -d "${tmux_configdir}/themes" ]]; then
-    mkdir -p "${tmux_configdir}/themes"
+if [[ ! -d "${path_to_configs_tmux}/themes" ]]; then
+    mkdir -p "${path_to_configs_tmux}/themes"
     path_to_nordtheme="${config_root}/external/nord-tmux"
 
     if [[ -e "${path_to_nordtheme}/nord.tmux" ]]; then
-        ln -s "${path_to_nordtheme}" "${tmux_configdir}/themes/nord-tmux"
+        ln -s "${path_to_nordtheme}" "${path_to_configs_tmux}/themes/nord-tmux"
 
     else
         echo "tmux theme not found. make sure the submodule is setup."
