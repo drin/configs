@@ -158,7 +158,7 @@ mode "resize" {
 # finds out, if available)
 bar {
       # Choose output for this bar to be displayed on
-      output HDMI-0
+      output HDMI-A-0
 
       status_command i3status --config ~/.config/i3/i3status.conf
 
@@ -177,7 +177,7 @@ bar {
 
 bar {
       # Choose output for this bar to be displayed on
-      output DP-1
+      output DisplayPort-1
       tray_output primary
 
       status_command i3status --config ~/.config/i3/i3status.conf
