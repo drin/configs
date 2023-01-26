@@ -44,10 +44,10 @@ set modeline              " check for a modeline
 " indentation
 set ai                    " Auto indent
 set expandtab             " expand tabs with spaces
-set tabstop=4             " <Tab> move three characters
-set shiftwidth=4          " >> and << shift 3 spaces
-set textwidth=99          " hard wrap at 79 characters
-set softtabstop=4         " see spaces as tabs
+set tabstop=2             " <Tab> move three characters
+set shiftwidth=2          " >> and << shift 2 spaces
+set textwidth=90          " hard wrap at 90 characters
+set softtabstop=2         " see spaces as tabs
 set scrolloff=5           " start scrolling when cursor is N lines from edge
 set wrap                  " linewrap
 
