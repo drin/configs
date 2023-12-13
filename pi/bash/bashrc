@@ -24,11 +24,28 @@ user_environ_path="${HOME}/.bash_environment"
 # Load global configs first, so they don't overwrite our config
 [[ -f "${global_config_path}" ]] && . "${global_config_path}"
 
+HISTCONTROL=ignoreboth
+HISTSIZE=1000
+HISTFILESIZE=2000
+
 # Customize prompt (https://www.gnu.org/software/bash/manual/bash.html#Controlling-the-Prompt)
 # Blue:   \[\033[01;34m\]
 # Yellow: \[\033[01;33m\]
 # Green:  \[\033[01;32m\]
 # Reset:  \[\033[00m\]
+
+# identify the chroot you work in (used in the prompt below)
+# NOTE: this is not used
+# if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+#     debian_chroot=$(cat /etc/debian_chroot)
+# fi
+
+# NOTE: this is how `debian_chroot` could be used
+# if [ "$color_prompt" = yes ]; then
+#     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w \$\[\033[00m\] '
+# else
+#     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+# fi
 
 # Without color
 # PS1='\A [\u@\h \W]\$ '
@@ -41,6 +58,7 @@ fi
 
 # append to the history file, don't overwrite it
 shopt -s histappend
+shopt -s checkwinsize
 
 # Load external scripts
 [[ -f "${user_function_path}" ]] && . "${user_function_path}"
