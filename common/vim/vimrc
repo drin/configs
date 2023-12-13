@@ -1,10 +1,10 @@
-" ------------------------------------------------
+" ------------------------------
 " .vimrc -- the way it ought to be: Ha. It rhymes!
-" ------------------------------------------------
 
 
+" ------------------------------
 " Basic Setup
-" -----------
+
 set encoding=utf-8
 set nocompatible          " no compatibility with vi
 
@@ -63,29 +63,19 @@ set viewoptions=folds
 set viewdir=$HOME/.vim/view
 
 
-
 " ------------------------------
 " Color Stuff
 
 " todo: compare this to "syntax on" above
 syntax enable
 
-" some experimented color options
-
-"set background=dark
+" some color options that I have been happy with for a long time
 let g:molokai_original = 1
-
 color seoul256
-" color molokai
-"color default
-"color darkdrin
-
-" <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
-
-" autocommands
-" ------------
+" ------------------------------
+" Autocommands
 
 " If VIM is compiled with autocommand support...
 if has("autocmd")
@@ -120,11 +110,9 @@ au BufRead,BufNewFile *.fs         set ft=fs
 "au BufRead,BufNewFile *.tex highlight clear OverLength
 "au BufRead,BufNewFile *.bib highlight clear OverLength
 
-" <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-
+" ------------------------------
 " Special Key Mappings
-" --------------------
 
 " Remove trailing spaces from lines w/ F6: http://vim.wikia.com/wiki/Remove_unwanted_spaces
 :nnoremap <silent> <F6> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
@@ -142,7 +130,7 @@ au BufRead,BufNewFile *.fs         set ft=fs
 :nnoremap <C-p><C-p> :set invpaste<CR>
 
 " Convenience for toggling Syntastic
-:nnoremap <C-s><C-s> :SyntasticToggleMode<CR>
+" :nnoremap <C-s><C-s> :SyntasticToggleMode<CR>
 
 " Use the space key to open and close code folds
 :vnoremap <space> zf<CR>
@@ -166,24 +154,7 @@ au BufRead,BufNewFile *.fs         set ft=fs
 :nnoremap el <c-w><Right>
 :nnoremap er <c-w>r
 
-" <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-
+" ------------------------------
 " Pathogen/plugin management
-" --------------------------
-
 execute pathogen#infect()
-
-" plugin settings
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list            = 1
-let g:syntastic_check_on_open            = 0
-let g:syntastic_check_on_wq              = 0
-let g:syntastic_tex_checkers             = ['lacheck']
-let g:syntastic_cpp_compiler_options     = ' --std=c++17'
-
-" <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
