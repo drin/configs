@@ -22,9 +22,9 @@ if test -z $__custom_fish_config_initialized
     fish_add_path "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
     fish_add_path "/Library/Apple/usr/bin"
     fish_add_path "/Library/TeX/texbin"
-    fish_add_path "/usr/local/bin" "/usr/bin" "/bin" "/usr/sbin" "/sbin"
     fish_add_path "/Applications/Keybase.app/Contents/SharedSupport/bin"
-
+    fish_add_path "/usr/local/bin" "/usr/bin" "/bin" "/usr/sbin" "/sbin"
+    fish_add_path "$HOME/.local/bin"
     fish_add_path "$HOME/.cargo/bin"
     fish_add_path "$HOME/toolbox/bin"
 
@@ -33,7 +33,7 @@ if test -z $__custom_fish_config_initialized
     command -v pyenv >/dev/null
     if test $status -eq 0
         if status -i
-            echo "Initializing pyenv..."
+          echo "Initializing pyenv..."
         end
 
         # pyenv init --path modifies PATH, but we just want the path
@@ -70,13 +70,13 @@ end
 # Idempotent configuration (may be executed many times)
 
 # >> common env variables
-set -gx GIT_EDITOR  vim
-set -gx EDITOR      vim
-set -gx PAGER       less
-set -gx LANG        "en_US.UTF-8"
+set -gx GIT_EDITOR vim
+set -gx EDITOR     vim
+set -gx PAGER      less
+set -gx LANG       "en_US.UTF-8"
 
 # for gpg-agent
-set -gx GPG_TTY     (tty)
+set -gx GPG_TTY    (tty)
 
 
 # >> add different homebrew path based on architecture
@@ -94,5 +94,5 @@ end
 
 # Only print if running interactively
 if status -i
-    echo "-- Fish environment initialized"
+  echo "-- Fish environment initialized"
 end
