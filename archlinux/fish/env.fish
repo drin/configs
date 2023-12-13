@@ -9,7 +9,9 @@
 # Non-idempotent configuration (execute once per environment)
 
 if test -z $__custom_fish_config_initialized
-    echo "-- Initializing fish environment"
+    if status -i
+      echo "-- Initializing fish environment"
+    end
 
     # so we only run this block once
     set -gx __custom_fish_config_initialized 1
@@ -27,7 +29,10 @@ if test -z $__custom_fish_config_initialized
     # >> If pyenv is installed, initialize it last; based on `pyenv init --path`
     which -- pyenv >/dev/null 2>&1
     if test "$status" -eq 0
-        echo "Initializing pyenv..."
+        if status -i
+            echo "Initializing pyenv..."
+        end
+
         fish_add_path "$HOME/.pyenv/shims"
         command pyenv rehash 2>/dev/null
     end
@@ -61,9 +66,10 @@ end
 # Idempotent configuration (may be executed many times)
 
 # >> common env variables
-set -gx GIT_EDITOR  vim
-set -gx EDITOR      vim
-set -gx PAGER       less
+set -gx GIT_EDITOR      vim
+set -gx EDITOR          vim
+set -gx PAGER           less
+set -gx PKG_CONFIG_PATH "/usr/local/lib/pkgconfig"
 
 # for gpg-agent
 set -gx GPG_TTY     (tty)

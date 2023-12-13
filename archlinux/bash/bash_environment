@@ -25,7 +25,7 @@ if [[ $BASH_ENV_LOADED -eq 0 ]]; then
 
     # if pyenv is available, initialize it for this environment
     type pyenv > /dev/null 2>&1
-    if [ $? -eq 0 ]; then
+    if [[ $? -eq 0 ]]; then
         eval "$(pyenv init -)"
         eval "$(pyenv init --path)"
     fi
