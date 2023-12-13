@@ -9,7 +9,9 @@
 # Non-idempotent configuration (execute once per environment)
 
 if test -z $__custom_fish_config_initialized
-    echo "-- Initializing fish environment"
+    if status -i
+        echo "-- Initializing fish environment"
+    end
 
     # so we only run this block once
     set -gx __custom_fish_config_initialized 1
@@ -19,6 +21,7 @@ if test -z $__custom_fish_config_initialized
     # >> Add paths in reverse order (`fish_add_path` prepends by default)
     fish_add_path "/Library/Frameworks/Mono.framework/Versions/Current/Commands"
     fish_add_path "/Library/Apple/usr/bin"
+    fish_add_path "/Library/TeX/texbin"
     fish_add_path "/usr/local/bin" "/usr/bin" "/bin" "/usr/sbin" "/sbin"
     fish_add_path "/Applications/Keybase.app/Contents/SharedSupport/bin"
 
@@ -29,7 +32,9 @@ if test -z $__custom_fish_config_initialized
     # >> If pyenv is installed, initialize it last
     command -v pyenv >/dev/null
     if test $status -eq 0
-        echo "Initializing pyenv..."
+        if status -i
+            echo "Initializing pyenv..."
+        end
 
         # pyenv init --path modifies PATH, but we just want the path
         fish_add_path (pyenv init --path | sed 's/.*\'\(.*\)\'.*/\1/')
