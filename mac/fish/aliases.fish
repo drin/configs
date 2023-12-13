@@ -2,7 +2,7 @@
 
 alias vim         'vim -O'
 alias external-ip 'dig @resolver1.opendns.com ANY myip.opendns.com +short'
-alias vpn-ucsc    'sudo openconnect --verbose 128.114.102.44:443'
+alias vpn-ucsc    'sudo openconnect --verbose https://vpn.ucsc.edu/'
 
 # because fish is installed by brew, and thus architecture dependent
 alias amdfish     'arch -x86_64 /usr/local/bin/fish'
