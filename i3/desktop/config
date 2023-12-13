@@ -30,7 +30,8 @@ font pango:Iosevka SS05 Light,Iosevka Light 9
 floating_modifier $mod
 
 # modify default window border
-new_window pixel
+default_border          pixel
+default_floating_border normal
 
 # disable focus on hover
 focus_follows_mouse no
