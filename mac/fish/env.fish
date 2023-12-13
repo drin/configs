@@ -47,6 +47,9 @@ if test -z $__custom_fish_config_initialized
         end
     end
 
+    # Forces true color mode; mostly useful for remote sessions?
+    set -g fish_term24bit 1
+
     # Prompt colors
     if not set -q __fish_prompt_normal
         set -gx __fish_prompt_normal (set_color normal)
