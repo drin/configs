@@ -7,6 +7,7 @@
 
 set encoding=utf-8
 set nocompatible          " no compatibility with vi
+set hidden                " recommended by vim-ctrlspace
 
 filetype on               " recognize syntax by file extension
 filetype plugin on        " Look at .vim/ftplugin
