@@ -25,7 +25,7 @@ require("catppuccin").setup({
   no_underline = false, -- Force no underline
 
   -- Handles the styles of general hi groups (see `:h highlight-args`):
-  styles = { 
+  styles = {
       comments     = { "bold"      }, -- Change the style of comments
       conditionals = { "italic"    },
       loops        = {},
@@ -47,10 +47,10 @@ require("catppuccin").setup({
   auto_integrations    = false,
 
   integrations = {
-      cmp        = true,
+      blink_cmp  = true,
       gitsigns   = true,
       nvimtree   = true,
-      treesitter = true,
+      treesitter = false,
       notify     = false,
 
       mini = {

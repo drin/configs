@@ -36,8 +36,6 @@ vim.g.mapleader      = " "
 vim.g.maplocalleader = "\\"
 
 
-
-
 -- Setup the lazy.nvim plugin itself (not to be confused with LazyVim)
 require("lazy").setup({
   -- Simple spec to import my plugins
