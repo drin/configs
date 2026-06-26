@@ -44,6 +44,7 @@ require("lazy").setup({
   },
 
   install = { colorscheme = { "seoul256", "catppuccin" }, },
+  rocks   = { enabled = false },
 
   -- checks plugin updates automatically, periodically
   checker = {

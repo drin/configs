@@ -44,8 +44,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
     vim.keymap.set('n', 'K',  vim.lsp.buf.hover, opts)
 
-    vim.keymap.set('n', 'gh', vim.diagnostic.goto_prev, opts)
-    vim.keymap.set('n', 'gl', vim.diagnostic.goto_next, opts)
+    vim.keymap.set('n', 'gh', function() vim.diagnostic.jump({ count = -1 }) end, opts)
+    vim.keymap.set('n', 'gl', function() vim.diagnostic.jump({ count =  1 }) end, opts)
 
     vim.keymap.set('n', 'gA', vim.lsp.buf.code_action, opts)
     vim.keymap.set('n', 'gf', vim.lsp.buf.format, opts)
